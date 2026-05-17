@@ -1,8 +1,15 @@
+@font-face {
+  font-family: "Nevera";
+  src: url("./assets/fonts/Nevera-regular.otf") format("opentype");
+}
+
 @import "tailwindcss";
 
 @theme {
   --color-primary: #fdfdfd;
   --color-secondary: #110d15;
   --color-ternary: #e9e9e9;
-  --color-accent: #dcfc54;
+  --color-accent: #bdfb00;
+
+  --font-nevera: "Nevera", sans-serif;
 }
