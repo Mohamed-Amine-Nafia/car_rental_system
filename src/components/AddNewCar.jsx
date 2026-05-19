@@ -98,7 +98,7 @@ function AddNewCar({ onClick }) {
           type="text"
           id="plate"
           name="plate"
-          placeholder="Matricule"
+          placeholder="??-?-?????"
           onChange={handleChange}
         />
         <label htmlFor="price">Prix par jour:</label>
@@ -129,7 +129,7 @@ function AddNewCar({ onClick }) {
           <option value="">--choisir--</option>
           <option value="disponible">Disponible</option>
           <option value="reserve">Reservé</option>
-          <option value="maintenance">Maintenance</option>
+          <option value="repair">Repair</option>
         </select>
         <input
           className="w-full py-1.5 inline-flex bg-secondary text-ternary mt-4 text-sm font-normal rounded-sm cursor-pointer hover:bg-accent hover:text-secondary transition duration-300 ease-linear"
