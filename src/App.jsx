@@ -10,12 +10,12 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <div className="container bg-ternary">
-        <div className="aside">
+      <div className="bg-primary w-screen h-screen flex font-Poppins">
+        <div className="w-1/5">
           <SideBar />
         </div>
 
-        <div className="main">
+        <div className="w-4/5">
           <Routes>
             <Route path="/Dashboard" element={<Dashboard />}></Route>
             <Route path="/Cars" element={<Cars />}></Route>

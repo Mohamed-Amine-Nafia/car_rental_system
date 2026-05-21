@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 
 import { useState } from "react";
 
-function AddNewCar({ onClick }) {
+function AddNewCar({ onClick, showform }) {
   const [formData, setFormData] = useState({
     brand: "",
     model: "",
@@ -54,10 +54,22 @@ function AddNewCar({ onClick }) {
       console.error(error);
       alert("Something went wrong");
     }
+    setFormData({
+      brand: "",
+      model: "",
+      year: "",
+      plate: "",
+      price: "",
+      status: "",
+      fuel: "",
+      transmission: "",
+    });
   }
 
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-ternary rounded-md  max-w-md p-8">
+    <div
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-ternary rounded-md  max-w-xl p-8 ${showform ? "scale-100" : "scale-0"} transition duration-300 ease-in-out`}
+    >
       <span
         onClick={() => onClick(false)}
         className="absolute top-2 right-2 cursor-pointer bg-ternary p-1 rounded-full hover:bg-accent transition duration-300 ease-linear"
@@ -73,6 +85,7 @@ function AddNewCar({ onClick }) {
           name="brand"
           placeholder="Marque"
           onChange={handleChange}
+          value={formData.brand}
         />
         <label htmlFor="model">Modele:</label>
         <input
@@ -82,6 +95,7 @@ function AddNewCar({ onClick }) {
           name="model"
           placeholder="Modele"
           onChange={handleChange}
+          value={formData.model}
         />
         <label htmlFor="year">Anneé:</label>
         <input
@@ -91,6 +105,7 @@ function AddNewCar({ onClick }) {
           name="year"
           placeholder="Anneé"
           onChange={handleChange}
+          value={formData.year}
         />
         <label htmlFor="plate">Matricule:</label>
         <input
@@ -100,6 +115,7 @@ function AddNewCar({ onClick }) {
           name="plate"
           placeholder="??-?-?????"
           onChange={handleChange}
+          value={formData.plate}
         />
         <label htmlFor="price">Prix par jour:</label>
         <input
@@ -109,6 +125,7 @@ function AddNewCar({ onClick }) {
           name="price"
           placeholder="Prix"
           onChange={handleChange}
+          value={formData.price}
         />
         <label htmlFor="image">Image:</label>
         <input
@@ -125,14 +142,40 @@ function AddNewCar({ onClick }) {
           name="status"
           id="status"
           onChange={handleChange}
+          value={formData.status}
         >
           <option value="">--choisir--</option>
           <option value="disponible">Disponible</option>
           <option value="reserve">Reservé</option>
           <option value="repair">Repair</option>
         </select>
+        <label htmlFor="fuel">Carburant:</label>
+        <select
+          className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
+          name="fuel"
+          id="fuel"
+          onChange={handleChange}
+          value={formData.fuel}
+        >
+          <option value="">--choisir--</option>
+          <option value="essence">Essence</option>
+          <option value="gasoil">Gasoil</option>
+        </select>
+        <label htmlFor="transmission">Transmission:</label>
+        <select
+          className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
+          name="transmission"
+          id="transmission"
+          onChange={handleChange}
+          value={formData.transmission}
+        >
+          <option value="">--choisir--</option>
+          <option value="automatique">Automatique</option>
+          <option value="manuelle">Manuelle</option>
+        </select>
+
         <input
-          className="w-full py-1.5 inline-flex bg-secondary text-ternary mt-4 text-sm font-normal rounded-sm cursor-pointer hover:bg-accent hover:text-secondary transition duration-300 ease-linear"
+          className="w-full py-2 inline-flex bg-secondary text-ternary mt-4 text-sm font-normal rounded-sm cursor-pointer hover:bg-accent hover:text-secondary transition duration-300 ease-linear"
           type="submit"
           value="Ajouter"
         />
