@@ -68,7 +68,7 @@ function AddNewCar({ onClick, showform }) {
 
   return (
     <div
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-ternary rounded-md  max-w-xl p-8 ${showform ? "scale-100" : "scale-0"} transition duration-300 ease-in-out`}
+      className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-ternary rounded-md  max-w-xl p-8 ${showform ? "scale-100" : "scale-0"} transition duration-300 ease-in-out`}
     >
       <span
         onClick={() => onClick(false)}
@@ -146,7 +146,7 @@ function AddNewCar({ onClick, showform }) {
         >
           <option value="">--choisir--</option>
           <option value="disponible">Disponible</option>
-          <option value="reserve">Reservé</option>
+          <option value="reservé">Reservé</option>
           <option value="repair">Repair</option>
         </select>
         <label htmlFor="fuel">Carburant:</label>

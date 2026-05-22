@@ -12,9 +12,9 @@ import { NavLink } from "react-router-dom";
 
 function SideBar() {
   return (
-    <div className="bg-secondary h-screen flex flex-col justify-between items-center  p-6 w-full">
-      <div className="w-full flex ">
-        <h2 className="text-primary  text-2xl inline-flex font-medium font-nevera">
+    <div className="flex justify-between items-center px-6 py-3 w-full ">
+      <div className="flex items-center">
+        <h2 className="text-secondary text-3xl inline-flex font-medium font-nevera">
           Rental
           <img
             className="w-8"
@@ -24,59 +24,59 @@ function SideBar() {
           X
         </h2>
       </div>
-      <div className="flex flex-col items-center justify-center gap-2 w-full">
+      <div className="flex items-center justify-between gap-4 ">
         <NavLink
-          to="/Dashboard"
+          to="/"
           className={({ isActive }) =>
-            ` flex   w-full  items-center  gap-2 cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary ${isActive ? "bg-ternary text-secondary" : " text-ternary"}`
+            ` flex items-center  gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
-          <LayoutDashboard size={24} strokeWidth={1.5} />
+          <LayoutDashboard size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Tableau de bord</span>
         </NavLink>
         <NavLink
           to="/Cars"
           className={({ isActive }) =>
-            ` flex  w-full  items-center gap-2 cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary ${isActive ? "bg-ternary text-secondary" : " text-ternary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
-          <CarFront size={24} strokeWidth={1.5} />
+          <CarFront size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Flotte</span>
         </NavLink>
 
         <NavLink
           to="/Rentals"
           className={({ isActive }) =>
-            ` flex  w-full  items-center gap-2 cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary ${isActive ? "bg-ternary text-secondary" : " text-ternary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
-          <KeyRound size={24} strokeWidth={1.5} />
+          <KeyRound size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Reservations</span>
         </NavLink>
         <NavLink
           to="/Clients"
           className={({ isActive }) =>
-            ` flex w-full  items-center gap-2 cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary ${isActive ? "bg-ternary text-secondary" : " text-ternary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
-          <Users size={24} strokeWidth={1.5} />
+          <Users size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Clients</span>
         </NavLink>
         <NavLink
           to="/Invoices"
           className={({ isActive }) =>
-            ` flex  w-full  items-center gap-2 cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary ${isActive ? "bg-ternary text-secondary" : " text-ternary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
-          <Receipt size={24} strokeWidth={1.5} />
+          <Receipt size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Factures</span>
         </NavLink>
       </div>
-      <div className="text-ternary w-full  flex  items-center gap-2   cursor-pointer  px-2 py-2 rounded-sm hover:bg-ternary transition-all duration-500 ease-linear hover:text-secondary">
-        <LogOut size={24} strokeWidth={1.5} />
+      <div className="text-ternary bg-secondary flex  items-center gap-2 cursor-pointer px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
+        <LogOut size={20} strokeWidth={1.5} />
         <span className="text-xs font-medium">Deconnexion</span>
       </div>
     </div>

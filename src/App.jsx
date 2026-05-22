@@ -10,14 +10,14 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-primary w-screen h-screen flex font-Poppins">
-        <div className="w-1/5">
+      <div className="bg-primary w-screen h-screen flex flex-col font-Poppins overflow-hidden">
+        <div className="w-full">
           <SideBar />
         </div>
 
-        <div className="w-4/5">
+        <div className="w-full h-4/5">
           <Routes>
-            <Route path="/Dashboard" element={<Dashboard />}></Route>
+            <Route path="/" element={<Dashboard />}></Route>
             <Route path="/Cars" element={<Cars />}></Route>
             <Route path="/Rentals" element={<Rentals />}></Route>
             <Route path="/Clients" element={<Clients />}></Route>

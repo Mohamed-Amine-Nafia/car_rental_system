@@ -1,14 +1,18 @@
-import { Cog, Fuel, Search } from "lucide-react";
+import { Check, Cog, Fuel, Search } from "lucide-react";
 import AddNewCar from "./AddNewCar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Await } from "react-router-dom";
 
+const filters = ["All", "Disponible", "Reservé", "Repair"];
+
 function Cars() {
+  const [isActive, setIsActive] = useState(0);
   const [showAddCar, setShowAddCar] = useState(false);
   const [isCarRemoved, setIsCarRemoved] = useState(false);
   const [notification, setNotification] = useState("");
   const [searchedCar, setSearchCar] = useState("");
   const [cars, setCars] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("all");
 
   function handleClick(value) {
     setShowAddCar(value);
@@ -38,9 +42,14 @@ function Cars() {
     fetchCars();
   }, [handleClick]);
 
-  const filterdCars = cars.filter((car) =>
-    car.brand.toLowerCase().includes(searchedCar.toLowerCase()),
-  );
+  const filterdCars = cars.filter((car) => {
+    const matchedStatus =
+      activeCategory === "all" ? cars : car.status === activeCategory;
+    const matchedSearch = car.brand
+      .toLowerCase()
+      .includes(searchedCar.toLowerCase());
+    return matchedSearch && matchedStatus;
+  });
 
   const handleCarDelete = async (id) => {
     const res = await fetch("http://localhost/car_rental/delete-car.php", {
@@ -62,55 +71,60 @@ function Cars() {
   };
 
   return (
-    <div className="relative h-screen w-full bg-primary  p-6">
-      <h2 className="text-2xl text-secondary font-semibold mt-6  border-b border-ternary pb-2.5">
+    <div className="relative w-full h-full bg-primary  px-6 pt-3">
+      <h2 className="text-2xl text-secondary font-semibold mt-4  border-b border-ternary pb-2.5">
         FLOTTE
       </h2>
-      <div className="flex items-center gap-4 w-full  mt-12  border-b border-ternary pb-2.5">
+      <div className="flex items-center gap-6 w-full  mt-6  border-b border-ternary pb-6">
         <div className="relative">
           <input
             value={searchedCar}
             type="text"
             placeholder="Rechercher"
-            className="bg-ternary rounded-md text-xs pl-3 pr-16 outline-0 border-0 py-2"
+            className="bg-ternary rounded-full text-xs pl-3 pr-16 outline-0 border-0 py-2.5"
             onChange={handleChange}
           />
-          <Search className="absolute right-2 top-1.5" size={18} />
+          <Search className="absolute right-3 top-2" size={18} />
         </div>
-        <div className="flex items-center gap-1.5 text-xs">
-          <span className="inline-block bg-secondary text-ternary px-5 py-2 rounded-md hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer">
-            Disponible
-          </span>
-          <span className="inline-block bg-secondary text-ternary px-4 py-2 rounded-md  hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer">
-            Reservé
-          </span>
-          <span className="inline-block bg-secondary text-ternary px-5 py-2 rounded-md  hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer">
-            Maintenance
-          </span>
+        <div className="flex items-center gap-3 text-xs">
+          {filters.map((item, index) => {
+            return (
+              <span
+                key={index}
+                onClick={() => {
+                  setIsActive(index);
+                  setActiveCategory(item.toLowerCase());
+                }}
+                className={`inline-block  px-5 py-2.5 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-secondary" : "bg-secondary text-ternary"}`}
+              >
+                {item}
+              </span>
+            );
+          })}
         </div>
         <div className="flex flex-1 justify-end text-[13px]">
           <button
             onClick={() => setShowAddCar(true)}
-            className="inline-flex items-center bg-accent text-secondary px-6 py-2 rounded-md font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
+            className="inline-flex items-center bg-accent text-secondary px-6 py-2.5 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
           >
             Ajouter une voiture
           </button>
         </div>
       </div>
       {/* Cars Container */}
-      <div className="grid grid-cols-3 overflow-y-scroll scroll-smooth scrollbar-none w-full h-2/3 text-sm mt-12 gap-5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-4 overflow-y-scroll scroll-smooth scrollbar-none w-full h-4/5   text-sm mt-6 ">
         {filterdCars.map((car) => {
           return (
             <div
               key={car.car_id}
-              className="relative bg-ternary-fade rounded-xl min-h-64 max-h-72 cursor-pointer  flex flex-col justify-between"
+              className="relative  bg-ternary-fade rounded-xl min-h-72 max-h-72 cursor-pointer  flex flex-col justify-between"
             >
               <img
                 src={`http://localhost/car_rental/uploads/cars/${car.image}`}
                 alt=""
-                className="absolute w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  hover:scale-110 transition duration-500 ease-linear"
+                className="absolute w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  hover:scale-110 transition duration-300 ease-linear"
               />
-              <div className="flex items-center gap-3 px-3 py-2">
+              <div className="flex items-center gap-3 px-5 py-3">
                 <img
                   src={`../../src/assets/images/car-logo/${car.brand}.png`}
                   alt="car"
@@ -125,12 +139,12 @@ function Cars() {
                   </span>
                 </div>
                 <span
-                  className={`inline-flex capitalize ml-auto   px-3 py-1 text-xs rounded-2xl ${car.status === "disponible" && "bg-emerald-100 text-emerald-600"} ${car.status === "reserve" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
+                  className={`inline-flex capitalize ml-auto   px-4 py-2 text-xs rounded-2xl ${car.status === "disponible" && "bg-emerald-100 text-emerald-600"} ${car.status === "reservé" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
                 >
                   {car.status}
                 </span>
               </div>
-              <div className="bg-ternary backdrop-blur-md flex items-center   px-3 py-2 rounded-br-xl rounded-bl-xl">
+              <div className="bg-ternary backdrop-blur-md flex items-center   px-5 py-3 rounded-br-xl rounded-bl-xl">
                 <div className="flex flex-col">
                   <span className="text-[16px] font-medium text-secondary  ">
                     {car.price}dh
@@ -145,7 +159,7 @@ function Cars() {
                 </div>
                 <button
                   onClick={() => handleCarDelete(car.car_id)}
-                  className="inline-flex px-6 py-2 bg-secondary text-ternary text-xs rounded-sm hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ml-auto"
+                  className="inline-flex px-6 py-2.5 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ml-auto"
                 >
                   Supprimer
                 </button>
@@ -158,12 +172,16 @@ function Cars() {
       {/* CAR REMOVING NOTIFICATION */}
       {isCarRemoved && (
         <div
-          className={`absolute flex flex-col items-center rounded-md  transition duration-300 ease-linear  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-ternary px-6 py-8 pb-4 ${isCarRemoved ? "scale-100" : "scale-0"} `}
+          className={`absolute flex flex-col gap-3.5 items-center rounded-md  transition duration-300 ease-linear  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-primary px-6 py-8 pb-4 ${isCarRemoved ? "scale-100" : "scale-0"} `}
         >
+          <Check
+            className="text-emerald-500 bg-emerald-100 p-1.5 rounded-full "
+            size={38}
+          />
           <p className="text-sm text-secondary">{notification}</p>
           <button
             onClick={() => setIsCarRemoved(false)}
-            className="inline-flex text-xs w-fit mt-5 rounded-sm  bg-secondary text-ternary py-1.5 px-4 hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer"
+            className="inline-flex text-xs w-fit mt-3 rounded-full  bg-secondary text-ternary py-2 px-5 hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer"
           >
             D'accord!
           </button>
