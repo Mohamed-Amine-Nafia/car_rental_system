@@ -3,7 +3,7 @@ import { useState } from "react";
 function Header() {
   const [isMenuShown, setIsMenuShown] = useState(false);
   return (
-    <header className="w-full flex items-center justify-between p-5 shadow-xs">
+    <header className="w-full h-20 flex items-center justify-between p-5 shadow-xs">
       <div className="flex-1">
         <h2 className="font-nevera inline-flex items-center text-2xl md:text-2xl lg:text-3xl">
           RENTAL
@@ -29,10 +29,10 @@ function Header() {
 
         <ul className="text-lg h-[calc(100vh-70px)]  w-full flex flex-col justify-center  gap-3 p-4">
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
-            <a href="#">Notre Flotte</a>
+            <a href="#cars-section">Notre Flotte</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
-            <a href="#">Etapes</a>
+            <a href="#rental-steps">Etapes</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
             <a href="#">Faq</a>
@@ -52,10 +52,10 @@ function Header() {
       <div className="hidden md:flex justify-center items-center flex-2 whitespace-nowrap">
         <ul className="flex justify-center gap-2 lg:gap-6 lg:text-sm text-xs ">
           <li className="bg-ternary text-secondary py-2.5 lg:px-5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear uppercase">
-            <a href="#">Notre Flotte</a>
+            <a href="#cars-section">Notre Flotte</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 lg:px-5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear uppercase">
-            <a href="#">Etapes</a>
+            <a href="#rental-steps">Etapes</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 lg:px-5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear uppercase">
             <a href="#">Faq</a>

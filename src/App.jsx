@@ -1,6 +1,7 @@
 import Cars from "./components/Cars";
 import Header from "./components/Header";
 import IntroSection from "./components/IntroSection";
+import RentalSteps from "./components/RentalSteps";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <IntroSection />
       <Cars />
+      <RentalSteps />
     </div>
   );
 }

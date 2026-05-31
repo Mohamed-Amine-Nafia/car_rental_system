@@ -27,7 +27,7 @@ function IntroSection() {
           <img className="w-full" src="../src/assets/images/car_1.png" alt="" />
         </div>
       </div>
-      <div className="hidden md:block mt-10 relative">
+      <div className="hidden md:block mt-16 relative">
         <CarsIconSlider />
         <div className="h-10 absolute bg-linear-to-r from-white to-transparent top-0 left-0 w-1/2"></div>
         <div className="h-10 absolute bg-linear-to-l from-white to-transparent top-0 right-0 w-1/2"></div>
