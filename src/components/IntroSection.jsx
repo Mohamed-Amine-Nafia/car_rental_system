@@ -6,7 +6,10 @@ function IntroSection() {
     <section className="flex flex-col">
       <div className="flex flex-col md:flex-row  md:items-center">
         <div className="mt-5 md:mt-0 p-5 md:w-1/2">
-          <h1 className="text-2xl font-semibold md:text-4xl lg:text-5xl">
+          <span className="inline-block py-1 px-3 text-xs bg-orange-100 text-orange-600 rounded-full">
+            Location de voitures à Laayoune
+          </span>
+          <h1 className="text-2xl font-semibold md:text-4xl lg:text-5xl mt-6">
             Votre prochaine grande évasion{" "}
             <span className="italic font-normal text-accent">
               commence ici.
@@ -18,13 +21,20 @@ function IntroSection() {
             quelques minutes.
           </p>
           <div className="mt-10">
-            <a className="bg-secondary text-ternary py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer">
+            <a
+              href="#cars-section"
+              className="bg-secondary text-ternary py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer"
+            >
               Reserver
             </a>
           </div>
         </div>
         <div className="w-full md:w-1/2">
-          <img className="w-full" src="../src/assets/images/car_1.png" alt="" />
+          <img
+            className="w-full"
+            src="../src/assets/images/car_1.webp"
+            alt="car"
+          />
         </div>
       </div>
       <div className="hidden md:block mt-16 relative">

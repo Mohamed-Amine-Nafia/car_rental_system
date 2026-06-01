@@ -4,21 +4,29 @@ function Header() {
   const [isMenuShown, setIsMenuShown] = useState(false);
   return (
     <header className="w-full h-20 flex items-center justify-between p-5 shadow-xs">
-      <div className="flex-1">
-        <h2 className="font-nevera inline-flex items-center text-2xl md:text-2xl lg:text-3xl">
-          RENTAL
-          <img className="w-9" src="../src/assets/images/wheel.webp" alt="" />
-          <span>X</span>
+      <div className="flex-1 ">
+        <h2 className="font-nevera inline-flex items-center text-base md:text-xl  lg:text-3xl">
+          OUZLAF
+          <img
+            className="w-7"
+            src="../src/assets/images/wheel.webp"
+            alt="logo"
+          />
+          DRIVE
         </h2>
       </div>
       <div
         className={`md:hidden z-50 fixed top-0 left-0 duration-200 ease-linear overflow-hidden bg-primary  min-h-screen p-1 ${isMenuShown ? "w-full" : "w-0"}`}
       >
         <div className="p-4 flex items-center  justify-between font-nevera">
-          <h2 className="text-2xl  inline-flex items-center">
-            RENTAL
-            <img className="w-9" src="../src/assets/images/wheel.webp" alt="" />
-            <span className="">X</span>
+          <h2 className="text-base inline-flex items-center">
+            OUZLAF
+            <img
+              className="w-7"
+              src="../src/assets/images/wheel.webp"
+              alt="logo"
+            />
+            DRIVE
           </h2>
           <X
             onClick={() => setIsMenuShown(false)}
@@ -58,17 +66,17 @@ function Header() {
             <a href="#rental-steps">Etapes</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 lg:px-5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear uppercase">
-            <a href="#">Faq</a>
+            <a href="#faqs">Faq</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 lg:px-5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear uppercase">
-            <a href="#">Contact</a>
+            <a href="#footer">Contact</a>
           </li>
         </ul>
       </div>
       <div className="hidden md:flex  flex-1 text-xs lg:text-sm justify-end ">
         <div className="inline-flex gap-1.5 items-center bg-secondary text-ternary py-2.5 lg:px-5 px-4 rounded-full">
           <Phone size={18} />
-          <span>0600000000</span>
+          <span>0660235689</span>
         </div>
       </div>
     </header>

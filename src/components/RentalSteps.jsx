@@ -5,7 +5,9 @@ function RentalSteps() {
         <h2 className="text-xl border-b-2 md:text-2xl font-medium">
           LES ETAPES
         </h2>
-        <span className="text-xs text-text-secondary">Comment ça marche</span>
+        <span className="text-xs md:text-sm text-text-secondary">
+          (Comment ça marche)
+        </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-4">
         <div className="bg-secondary p-5 rounded-xl hover:bg-accent duration-300 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary">
