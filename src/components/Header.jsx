@@ -3,7 +3,7 @@ import { useState } from "react";
 function Header() {
   const [isMenuShown, setIsMenuShown] = useState(false);
   return (
-    <header className="w-full h-20 flex items-center justify-between p-5 shadow-xs">
+    <header className="sticky z-50 top-0 left-0 bg-black/15 backdrop-blur-3xl h-14 md:h-16  flex items-center justify-between p-5 shadow-xs">
       <div className="flex-1 ">
         <h2 className="font-nevera inline-flex items-center text-base md:text-xl  lg:text-3xl">
           OUZLAF
@@ -16,18 +16,9 @@ function Header() {
         </h2>
       </div>
       <div
-        className={`md:hidden z-50 fixed top-0 left-0 duration-200 ease-linear overflow-hidden bg-primary  min-h-screen p-1 ${isMenuShown ? "w-full" : "w-0"}`}
+        className={`md:hidden z-50 fixed top-0 left-0 duration-200 ease-linear w-2/3 overflow-hidden bg-primary  min-h-screen p-1 ${isMenuShown ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <div className="p-4 flex items-center  justify-between font-nevera">
-          <h2 className="text-base inline-flex items-center">
-            OUZLAF
-            <img
-              className="w-7"
-              src="../src/assets/images/wheel.webp"
-              alt="logo"
-            />
-            DRIVE
-          </h2>
+        <div className="py-2 px-3 flex items-center  justify-end font-nevera">
           <X
             onClick={() => setIsMenuShown(false)}
             className="bg-red-400 p-1 rounded-full hover:bg-accent duration-300 ease-linear cursor-pointer"
@@ -35,7 +26,7 @@ function Header() {
           />
         </div>
 
-        <ul className="text-lg h-[calc(100vh-70px)]  w-full flex flex-col justify-center  gap-3 p-4">
+        <ul className="text-sm h-[calc(100vh-70px)]  w-full flex flex-col justify-center  gap-3 p-4">
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
             <a href="#cars-section">Notre Flotte</a>
           </li>
@@ -43,10 +34,10 @@ function Header() {
             <a href="#rental-steps">Etapes</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
-            <a href="#">Faq</a>
+            <a href="#faqs">Faq</a>
           </li>
           <li className="bg-ternary text-secondary py-2.5 px-3 rounded-full text-center hover:bg-secondary hover:text-ternary duration-300 ease-linear">
-            <a href="#">Contact</a>
+            <a href="#footer">Contact</a>
           </li>
         </ul>
       </div>

@@ -25,9 +25,15 @@ function Cars() {
 
         if (data.data.length > 0) {
           setCars(data.data);
+          localStorage.setItem("cars", JSON.stringify(data.data));
         }
       } catch (error) {
-        throw new Error();
+        const cached = JSON.parse(localStorage.getItem("cars"));
+        if (cached) {
+          setCars(cached);
+        } else {
+          setCars([]);
+        }
       }
     };
     fetchCars();

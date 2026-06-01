@@ -39,12 +39,12 @@ function Footer() {
             <br />
             <span className="inline-flex items-center gap-1.5 mt-1.5 text-xs">
               <MapPin size={17} />
-              EL WAHDA 01, AV AL HIZAM AL KABIR, NR 223, Laayoune 70000
+              EL WAHDA 01, AV AL HIZAM AL KABIR, NR 223
             </span>
           </div>
 
-          <div className="bg-secondary text-ternary text-sm flex mt-6 items-center gap-1  pb-5 rounded-br-xl rounded-bl-xl">
-            <span>&copy;</span>
+          <div className="bg-secondary text-ternary text-xs flex mt-6 items-center gap-1  pb-5 rounded-br-xl rounded-bl-xl">
+            <span className="text-sm">&copy;</span>
             <span>{new Date().getFullYear()}</span>
             <span>OUZLAF DRIVE Tous droits réservés</span>
           </div>
