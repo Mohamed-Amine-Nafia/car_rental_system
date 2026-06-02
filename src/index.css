@@ -1,8 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
 @font-face {
   font-family: "Nevera";
   src: url("../src/assets/fonts/Nevera-regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Gibed";
+  src: url("../src/assets/fonts/gibed.otf") format("opentype");
+}
+@font-face {
+  font-family: "Quizlo";
+  src: url("../src/assets/fonts/Quizlo DEMO.otf") format("opentype");
+}
+@font-face {
+  font-family: "Chesna";
+  src: url("../src/assets/fonts/chesnagrotesk-medium.otf") format("opentype");
 }
 
 @import "tailwindcss";
@@ -17,6 +30,9 @@
   --color-text-ternary: #adb5bd;
 
   --font-nevera: "Nevera", sans-serif;
+  --font-gibed: "Gibed", sans-serif;
+  --font-quizlo: "Quizlo", sans-serif;
+  --font-chesna: "Chesna", sans-serif;
   --font-Poppins: "Poppins", sans-serif;
   --font-Urbanist: "Urbanist", sans-serif;
 

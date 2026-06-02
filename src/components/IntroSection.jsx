@@ -25,7 +25,7 @@ function IntroSection() {
               href="#cars-section"
               className="bg-secondary text-ternary py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer"
             >
-              Reserver
+              Reserver maintenant
             </a>
           </div>
         </div>

@@ -239,7 +239,7 @@ function Card({ card, index, activeIndex, totalCards }) {
       animate={animate}
       initial={false}
     >
-      <div className="relative w-full flex flex-col items-center justify-center h-full  md:h-4/5 rounded-xl shadow-2xl overflow-hidden bg-secondary">
+      <div className="relative w-full  flex flex-col items-center justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden bg-primary">
         <img
           src={card.imageUrl}
           alt={card.title}
@@ -251,11 +251,11 @@ function Card({ card, index, activeIndex, totalCards }) {
               "https://placehold.co/400x600/1e1e1e/ffffff?text=Image+Missing";
           }}
         />
-        <div className="  text-ternary text-center mt-4">
-          <h4 className="text-white text-xs md:text-sm font-semibold">
+        <div className="text-center mt-4">
+          <h4 className="text-secondary text-xs md:text-sm font-semibold">
             {card.user}
           </h4>
-          <p className="text-text-ternary text-xs w-full mt-2 px-8">
+          <p className="text-text-secondary text-xs w-full mt-2 px-8">
             {card.review}
           </p>
         </div>
