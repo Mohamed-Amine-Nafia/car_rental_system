@@ -14,21 +14,15 @@ function SideBar() {
   return (
     <div className="flex justify-between items-center px-6 py-3 w-full ">
       <div className="flex items-center">
-        <h2 className="text-secondary text-3xl inline-flex font-medium font-nevera">
-          Rental
-          <img
-            className="w-8"
-            src="../../src/assets/images/wheel.webp"
-            alt=""
-          />
-          X
+        <h2 className="text-secondary text-3xl inline-flex font-medium font-gibed">
+          OUZLAF DRIVE
         </h2>
       </div>
       <div className="flex items-center justify-between gap-4 ">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            ` flex items-center  gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center  gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           <LayoutDashboard size={20} strokeWidth={1.5} />
@@ -37,7 +31,7 @@ function SideBar() {
         <NavLink
           to="/Cars"
           className={({ isActive }) =>
-            ` flex items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           <CarFront size={20} strokeWidth={1.5} />
@@ -47,7 +41,7 @@ function SideBar() {
         <NavLink
           to="/Rentals"
           className={({ isActive }) =>
-            ` flex  items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
@@ -57,7 +51,7 @@ function SideBar() {
         <NavLink
           to="/Clients"
           className={({ isActive }) =>
-            ` flex items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
@@ -67,7 +61,7 @@ function SideBar() {
         <NavLink
           to="/Invoices"
           className={({ isActive }) =>
-            ` flex  items-center gap-2 cursor-pointer  px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
@@ -75,7 +69,7 @@ function SideBar() {
           <span className="text-xs font-medium">Factures</span>
         </NavLink>
       </div>
-      <div className="text-ternary bg-secondary flex  items-center gap-2 cursor-pointer px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
+      <div className="text-ternary bg-secondary flex  items-center gap-2 cursor-pointer px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
         <LogOut size={20} strokeWidth={1.5} />
         <span className="text-xs font-medium">Deconnexion</span>
       </div>

@@ -2,20 +2,30 @@ import { Check, Cog, Fuel, Search } from "lucide-react";
 import AddNewCar from "./AddNewCar";
 import { useEffect, useRef, useState } from "react";
 import { Await } from "react-router-dom";
+import UpdateCar from "./UpdateCar";
 
-const filters = ["All", "Disponible", "Reservé", "Repair"];
+const filters = ["Tous", "Disponible", "Reservé", "Repair"];
 
 function Cars() {
   const [isActive, setIsActive] = useState(0);
   const [showAddCar, setShowAddCar] = useState(false);
+  const [showUpdateCar, setShowUpdateCar] = useState(false);
+  const [carToUpdate, setCarToUpdate] = useState(null);
   const [isCarRemoved, setIsCarRemoved] = useState(false);
   const [notification, setNotification] = useState("");
   const [searchedCar, setSearchCar] = useState("");
   const [cars, setCars] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("tous");
+
+  const [confirMessage, setConfirmMessage] = useState(false);
+
+  const [carId, setCarId] = useState(null);
 
   function handleClick(value) {
     setShowAddCar(value);
+  }
+  function handleUpdate(value) {
+    setShowUpdateCar(value);
   }
 
   function handleChange(event) {
@@ -40,11 +50,11 @@ function Cars() {
     };
 
     fetchCars();
-  }, [handleClick]);
+  }, []);
 
   const filterdCars = cars.filter((car) => {
     const matchedStatus =
-      activeCategory === "all" ? cars : car.status === activeCategory;
+      activeCategory === "tous" ? cars : car.status === activeCategory;
     const matchedSearch = car.brand
       .toLowerCase()
       .includes(searchedCar.toLowerCase());
@@ -81,10 +91,10 @@ function Cars() {
             value={searchedCar}
             type="text"
             placeholder="Rechercher"
-            className="bg-ternary rounded-full text-xs pl-3 pr-16 outline-0 border-0 py-2.5"
+            className="bg-ternary rounded-full text-xs pl-3 pr-16 outline-0 border-0 py-2"
             onChange={handleChange}
           />
-          <Search className="absolute right-3 top-2" size={18} />
+          <Search className="absolute right-3 top-1.5" size={18} />
         </div>
         <div className="flex items-center gap-3 text-xs">
           {filters.map((item, index) => {
@@ -95,17 +105,17 @@ function Cars() {
                   setIsActive(index);
                   setActiveCategory(item.toLowerCase());
                 }}
-                className={`inline-block  px-5 py-2.5 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-secondary" : "bg-secondary text-ternary"}`}
+                className={`inline-block  px-5 py-2 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-secondary" : "bg-secondary text-ternary"}`}
               >
                 {item}
               </span>
             );
           })}
         </div>
-        <div className="flex flex-1 justify-end text-[13px]">
+        <div className="flex flex-1 justify-end text-xs">
           <button
             onClick={() => setShowAddCar(true)}
-            className="inline-flex items-center bg-accent text-secondary px-6 py-2.5 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
+            className="inline-flex items-center bg-accent text-secondary px-6 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
           >
             Ajouter une voiture
           </button>
@@ -157,18 +167,33 @@ function Cars() {
                     <span className="text-xs">{car.fuel}</span>
                   </div>
                 </div>
-                <button
-                  onClick={() => handleCarDelete(car.car_id)}
-                  className="inline-flex px-6 py-2.5 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ml-auto"
-                >
-                  Supprimer
-                </button>
+                <div className="flex items-center gap-1.5 ml-auto">
+                  <button
+                    onClick={() => {
+                      setCarId(car.car_id);
+                      setConfirmMessage(true);
+                    }}
+                    className="inline-flex px-4 py-2 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
+                  >
+                    Supprimer
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCarToUpdate(car);
+                      setShowUpdateCar(true);
+                    }}
+                    className="inline-flex px-4 py-2 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer"
+                  >
+                    Mettre à jour
+                  </button>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
       <AddNewCar showform={showAddCar} onClick={handleClick} />
+
       {/* CAR REMOVING NOTIFICATION */}
       {isCarRemoved && (
         <div
@@ -185,6 +210,37 @@ function Cars() {
           >
             D'accord!
           </button>
+        </div>
+      )}
+      {showUpdateCar && (
+        <UpdateCar
+          showUpdateForm={showUpdateCar}
+          onUpdate={handleUpdate}
+          car={carToUpdate}
+        />
+      )}
+      {confirMessage && (
+        <div className="absolute border-2 border-secondary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-primary py-8 px-8 rounded-md flex flex-col items-center gap-5">
+          <p className="text-sm">
+            Êtes-vous sûr de vouloir supprimer cette voiture ?
+          </p>
+          <div className="flex items-center gap-5">
+            <button
+              className="bg-red-300 py-2 px-4 text-sm rounded-sm hover:bg-red-400 duration-200 ease-linear cursor-pointer"
+              onClick={() => setConfirmMessage(false)}
+            >
+              Annuler
+            </button>
+            <button
+              className="bg-green-300 py-2 px-4 text-sm rounded-sm hover:bg-green-400 duration-200 ease-linear cursor-pointer"
+              onClick={() => {
+                handleCarDelete(carId);
+                setConfirmMessage(false);
+              }}
+            >
+              Supprimer
+            </button>
+          </div>
         </div>
       )}
     </div>
