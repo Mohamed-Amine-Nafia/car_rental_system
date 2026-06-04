@@ -6,7 +6,7 @@ function IntroSection() {
     <section className="flex flex-col">
       <div className="flex flex-col md:flex-row  md:items-center">
         <div className="mt-5 md:mt-0 p-5 md:w-1/2">
-          <span className="inline-block py-1 px-3 text-xs bg-orange-100 text-orange-600 rounded-full">
+          <span className="inline-block py-1 px-3 text-xs bg-accent text-secondary rounded-full">
             Location de voitures à Laayoune
           </span>
           <h1 className="text-2xl font-semibold md:text-4xl lg:text-5xl mt-6">
@@ -23,21 +23,21 @@ function IntroSection() {
           <div className="mt-10">
             <a
               href="#cars-section"
-              className="bg-secondary text-ternary py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer"
+              className="bg-secondary text-ternary py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer"
             >
               Reserver maintenant
             </a>
           </div>
         </div>
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 relative">
           <img
-            className="w-full"
-            src="../src/assets/images/car_1.webp"
+            className="w-full  mask-[url('../src/assets/images/splash_2.png')] mask-cover mask-no-repeat mask-center"
+            src="../src/assets/images/car_2.webp"
             alt="car"
           />
         </div>
       </div>
-      <div className="hidden md:block mt-16 relative">
+      <div className="hidden md:block mt-10 relative">
         <CarsIconSlider />
         <div className="h-10 absolute bg-linear-to-r from-white to-transparent top-0 left-0 w-1/2"></div>
         <div className="h-10 absolute bg-linear-to-l from-white to-transparent top-0 right-0 w-1/2"></div>

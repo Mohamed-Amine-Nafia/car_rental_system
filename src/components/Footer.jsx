@@ -9,14 +9,7 @@ function Footer() {
       <div className="flex flex-col mt-6 md:flex-row md:justify-between md:items-center gap-4 bg-secondary p-5  rounded-xl">
         <div className="w-full md:w-1/2">
           <div className="text-ternary text-sm md:text-base">
-            <h4 className="inline-flex items-center font-nevera">
-              <img
-                className="w-6"
-                src="../src/assets/images/wheel.webp"
-                alt="logo"
-              />
-              UZLAF DRIVE
-            </h4>
+            <h4 className="inline-flex items-center font-nevera">OUZLAF</h4>
           </div>
           <div className="text-ternary mt-5 text-sm">
             <span className="text-ternary inline-flex ">Contactez nous:</span>

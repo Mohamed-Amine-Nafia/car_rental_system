@@ -51,7 +51,7 @@ function Faq() {
             <div key={faq.id} className="flex flex-col">
               <h4
                 onClick={() => setActive(index)}
-                className="bg-ternary text-secondary py-2.5 px-4 cursor-pointer border-b border-b-ternary hover:bg-accent hover:text-secondary duration-300 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base "
+                className="bg-ternary text-secondary py-2.5 px-4 cursor-pointer border-b border-b-ternary hover:bg-accent hover:text-secondary duration-200 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base "
               >
                 Q : {faq.q}
                 <span

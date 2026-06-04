@@ -151,7 +151,7 @@ export default function Carousel() {
           <a
             href="https://www.google.com/maps/place/St%C3%A9+OUZLAF+DRIVE/@27.1303634,-13.201556,308m/data=!3m1!1e3!4m17!1m8!3m7!1s0xc3772c616b079c9:0x9bea0d2b555fce5f!2sLaayoune!3b1!8m2!3d27.1500384!4d-13.1990758!16s%2Fg%2F11b6rc7tms!3m7!1s0xc37738ba690eaff:0x15d364ef7c9a343d!8m2!3d27.1303862!4d-13.1985005!9m1!1b1!16s%2Fg%2F11ynzh_73j?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
-            className="inline-flex items-center gap-2 bg-secondary w-fit text-ternary py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-300 ease-linear"
+            className="inline-flex items-center gap-2 bg-secondary w-fit text-ternary py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-200 ease-linear"
           >
             Google Reviews
             <ExternalLink size={18} />

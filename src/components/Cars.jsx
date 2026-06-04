@@ -123,7 +123,7 @@ function Cars() {
                 </div>
                 <button
                   onClick={() => handleClick(car)}
-                  className="absolute top-1/2 -translate-y-1/2 right-3 bg-secondary text-ternary py-1.5 px-4 rounded-full text-sm  hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer"
+                  className="absolute top-1/2 -translate-y-1/2 right-3 bg-secondary text-ternary py-1.5 px-4 rounded-full text-sm  hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer"
                 >
                   Reserver
                 </button>

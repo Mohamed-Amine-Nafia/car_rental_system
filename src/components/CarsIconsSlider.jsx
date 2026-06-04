@@ -49,11 +49,11 @@ function CarsIconSlider() {
             key={car.id}
             className={`absolute left-full animate-slideIn h-full w-[11.11%]`}
             style={{
-              animationDelay: `${index}s`,
+              animationDelay: `-${index}s`,
             }}
           >
             <img
-              className="grayscale-100 w-11 h-full"
+              className="w-11 h-full"
               src={`../../src/assets/images/cars_icons/${car.carImage}.png`}
               alt="car"
             />
