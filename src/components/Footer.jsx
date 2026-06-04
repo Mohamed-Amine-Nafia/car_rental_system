@@ -1,12 +1,16 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
-function Footer() {
+function Footer({ isDarkMode }) {
   return (
     <div id="footer" className="p-5 flex flex-col  w-full">
-      <h3 className="text-xl md:text-2xl font-medium border-b-2 w-fit">
+      <h3
+        className={`text-xl w-fit md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
+      >
         CONTACTEZ NOUS
       </h3>
-      <div className="flex flex-col mt-6 md:flex-row md:justify-between md:items-center gap-4 bg-secondary p-5  rounded-xl">
+      <div
+        className={`flex flex-col mt-6 md:flex-row md:justify-between md:items-center gap-4  p-5  rounded-xl ${isDarkMode ? "bg-gray-900" : "bg-secondary"}`}
+      >
         <div className="w-full md:w-1/2">
           <div className="text-ternary text-sm md:text-base">
             <h4 className="inline-flex items-center font-nevera">OUZLAF</h4>
@@ -36,7 +40,9 @@ function Footer() {
             </span>
           </div>
 
-          <div className="bg-secondary text-ternary text-xs flex mt-6 items-center gap-1  pb-5 rounded-br-xl rounded-bl-xl">
+          <div
+            className={` text-ternary text-xs flex mt-6 items-center gap-1  pb-5 rounded-br-xl rounded-bl-xl ${isDarkMode ? "bg-gray-900 " : "bg-secondary"}`}
+          >
             <span className="text-sm">&copy;</span>
             <span>{new Date().getFullYear()}</span>
             <span>OUZLAF DRIVE Tous droits réservés</span>

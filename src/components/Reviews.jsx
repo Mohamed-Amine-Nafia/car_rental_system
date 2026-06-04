@@ -98,7 +98,7 @@ const cardData = [
       "Excellent rental service, professional and friendly team. I'm very satisfied with my experience. Best of luck! 😊",
   },
 ];
-export default function Carousel() {
+export default function Carousel({ isDarkMode }) {
   const [activeIndex, setActiveIndex] = useState(
     Math.floor(cardData.length / 2),
   );
@@ -128,7 +128,7 @@ export default function Carousel() {
       autoplayIntervalRef.current = setInterval(goToNext, autoplayDelay);
     }
   };
-  const onDragEnd = (event, info) => {
+  const onDragEnd = (event, info, { isDarkMode }) => {
     const dragThreshold = 75;
     const dragOffset = info.offset.x;
     if (dragOffset > dragThreshold) {
@@ -139,7 +139,9 @@ export default function Carousel() {
   };
   return (
     <section className="w-full  p-5 flex-col items-center justify-center font-Poppins overflow-hidden">
-      <h3 className=" text-xl md:text-2xl font-medium text-secondary uppercase w-fit border-b-2">
+      <h3
+        className={`text-xl md:text-2xl w-fit font-medium border-b-2 uppercase  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
+      >
         Témoignages de nos clients
       </h3>
       <div
@@ -147,11 +149,13 @@ export default function Carousel() {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative flex w-full flex-col rounded-xl border border-white/10  bg-ternary  p-4 pt-6 md:p-6">
+        <div
+          className={`relative flex w-full  flex-col rounded-xl  p-4 md:pl-0 pt-6 md:p-6 ${isDarkMode ? "bg-transparent" : "bg-transparent"}`}
+        >
           <a
             href="https://www.google.com/maps/place/St%C3%A9+OUZLAF+DRIVE/@27.1303634,-13.201556,308m/data=!3m1!1e3!4m17!1m8!3m7!1s0xc3772c616b079c9:0x9bea0d2b555fce5f!2sLaayoune!3b1!8m2!3d27.1500384!4d-13.1990758!16s%2Fg%2F11b6rc7tms!3m7!1s0xc37738ba690eaff:0x15d364ef7c9a343d!8m2!3d27.1303862!4d-13.1985005!9m1!1b1!16s%2Fg%2F11ynzh_73j?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
-            className="inline-flex items-center gap-2 bg-secondary w-fit text-ternary py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-200 ease-linear"
+            className={`inline-flex items-center gap-2  w-fit  py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-200 ease-linear ${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"}`}
           >
             Google Reviews
             <ExternalLink size={18} />
@@ -175,6 +179,7 @@ export default function Carousel() {
                   index={index}
                   activeIndex={activeIndex}
                   totalCards={cardData.length}
+                  isDarkMode={isDarkMode}
                 />
               ))}
             </motion.div>
@@ -211,7 +216,7 @@ export default function Carousel() {
     </section>
   );
 }
-function Card({ card, index, activeIndex, totalCards }) {
+function Card({ card, index, activeIndex, totalCards, isDarkMode }) {
   let offset = index - activeIndex;
   if (offset > totalCards / 2) {
     offset -= totalCards;
@@ -232,14 +237,16 @@ function Card({ card, index, activeIndex, totalCards }) {
   };
   return (
     <motion.div
-      className="absolute w-4/5 p-5  md:w-1/2 h-[95%]"
+      className="absolute w-4/5 p- flex  justify-center  md:w-1/2 h-[95%]"
       style={{
         transformStyle: "preserve-3d",
       }}
       animate={animate}
       initial={false}
     >
-      <div className="relative w-full  flex flex-col items-center justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden bg-primary">
+      <div
+        className={`relative w-full md:w-2/3  flex flex-col items-center justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-ternary"}`}
+      >
         <img
           src={card.imageUrl}
           alt={card.title}
@@ -252,10 +259,14 @@ function Card({ card, index, activeIndex, totalCards }) {
           }}
         />
         <div className="text-center mt-4">
-          <h4 className="text-secondary text-xs md:text-sm font-semibold">
+          <h4
+            className={` text-xs md:text-sm font-semibold ${isDarkMode ? "text-ternary" : "text-secondary"}`}
+          >
             {card.user}
           </h4>
-          <p className="text-text-secondary text-xs w-full mt-2 px-8">
+          <p
+            className={`text-xs w-full mt-2 px-8 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+          >
             {card.review}
           </p>
         </div>

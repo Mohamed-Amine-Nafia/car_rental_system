@@ -1,7 +1,7 @@
 import { Cog, Fuel, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function Cars() {
+function Cars({ isDarkMode }) {
   const [cars, setCars] = useState([]);
   const [reservedCar, setReservedCar] = useState(null);
   const [isFormShown, setIsFormShown] = useState(false);
@@ -72,10 +72,14 @@ function Cars() {
   return (
     <div id="cars-section" className="p-5 mt-4 md:mt-10 lg:mt-16 relative">
       <div className="flex gap-1.5 items-center">
-        <h2 className="text-xl md:text-2xl font-medium border-b-2 border-secondary whitespace-nowrap">
+        <h2
+          className={`text-xl md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
+        >
           NOTRE FLOTTE
         </h2>
-        <span className="text-xs md:text-sm text-text-secondary whitespace-nowrap">
+        <span
+          className={`text-xs md:text-sm whitespace-nowrap ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+        >
           (Les voitures disponibles)
         </span>
       </div>
@@ -83,7 +87,7 @@ function Cars() {
         {availableCars.map((car) => {
           return (
             <div
-              className="relative flex flex-col justify-between h-72 bg-ternary-fade rounded-xl cursor-pointer"
+              className={`relative flex flex-col justify-between h-72  rounded-xl cursor-pointer ${isDarkMode ? "bg-gray-900" : "bg-ternary-fade"}`}
               key={car.car_id}
             >
               <img
@@ -98,25 +102,47 @@ function Cars() {
                   alt="car"
                 />
                 <div>
-                  <span className="text-lg font-medium">{car.brand}</span>
-                  <span className="ml-1 text-text-secondary">{car.model}</span>
+                  <span
+                    className={`text-lg font-medium ${isDarkMode ? "text-primary" : "text-secondary"}`}
+                  >
+                    {car.brand}
+                  </span>
+                  <span
+                    className={`ml-1  ${isDarkMode ? "text-ternary" : "text-text-secondary"}`}
+                  >
+                    {car.model}
+                  </span>
                   <br />
-                  <span className="text-text-secondary">{car.plate}</span>
+                  <span
+                    className={` ${isDarkMode ? "text-ternary" : "text-text-secondary"}`}
+                  >
+                    {car.plate}
+                  </span>
                 </div>
               </div>
               <div className="bg-black/5 p-3 backdrop-blur-2xl rounded-br-xl rounded-bl-xl relative">
                 <div>
-                  <span className="text-secondary text-lg">
+                  <span
+                    className={`text-lg ${isDarkMode ? "text-primary" : "text-secondary"}`}
+                  >
                     {car.price} MAD
                   </span>
-                  <span className="text-text-secondary">/Jour</span>
+                  <span
+                    className={` ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+                  >
+                    /Jour
+                  </span>
                 </div>
                 <div className="flex gap-2 text-xs md:text-sm">
-                  <span className="inline-flex items-center gap-1 text-text-secondary">
+                  <span
+                    className={`inline-flex items-center gap-1 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+                  >
                     <Cog size={17} />
                     {car.transmission}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-text-secondary">
+                  <span
+                    className={`inline-flex items-center gap-1 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+                  >
                     <Fuel size={17} />
                     {car.fuel}
                   </span>

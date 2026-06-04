@@ -34,14 +34,20 @@ const faqs = [
   },
 ];
 
-function Faq() {
+function Faq({ isDarkMode }) {
   const [isActive, setActive] = useState(null);
 
   return (
     <div id="faqs" className="mt-10 p-5">
       <div className="flex items-center gap-1.5 text-secondary">
-        <h3 className="text-xl md:text-2xl border-b-2 font-medium">FAQS </h3>
-        <span className="text-xs md:text-sm text-text-secondary">
+        <h3
+          className={`text-xl md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
+        >
+          FAQS{" "}
+        </h3>
+        <span
+          className={`text-xs md:text-sm whitespace-nowrap ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+        >
           (Les questions fréquentes)
         </span>
       </div>
@@ -51,17 +57,17 @@ function Faq() {
             <div key={faq.id} className="flex flex-col">
               <h4
                 onClick={() => setActive(index)}
-                className="bg-ternary text-secondary py-2.5 px-4 cursor-pointer border-b border-b-ternary hover:bg-accent hover:text-secondary duration-200 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base "
+                className={` text-secondary py-2.5 px-4 cursor-pointer border-b  hover:bg-accent hover:text-secondary duration-200 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base ${isDarkMode ? "bg-gray-900 border-b-gray-900 text-ternary" : "bg-ternary-fade border-b-ternary text-secondary"} `}
               >
                 Q : {faq.q}
                 <span
-                  className={`${isActive === index ? "rotate-180" : "rotate-0"} duration-200 ease-linear`}
+                  className={`${isActive === index ? "rotate-180" : "rotate-0"} duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"}`}
                 >
                   <ChevronDown />
                 </span>
               </h4>
               <p
-                className={`${isActive === index ? "h-fit px-2 py-3" : "h-0"} overflow-hidden  duration-200 ease-linear rounded-xl text-xs md:text-sm`}
+                className={`${isActive === index ? "h-fit px-2 py-3" : "h-0"} overflow-hidden  duration-200 ease-linear rounded-xl text-xs md:text-sm ${isDarkMode ? "text-ternary" : "text-secondary"}`}
               >
                 R : {faq.a}
               </p>
