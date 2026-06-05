@@ -245,7 +245,7 @@ function Card({ card, index, activeIndex, totalCards, isDarkMode }) {
       initial={false}
     >
       <div
-        className={`relative w-full md:w-2/3  flex flex-col items-center justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-ternary"}`}
+        className={`relative w-full md:w-2/3  flex flex-col items-center border justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
       >
         <img
           src={card.imageUrl}

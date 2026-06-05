@@ -15,7 +15,7 @@ function RentalSteps({ isDarkMode }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-4">
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"} border-2 `}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"} border-2 `}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
@@ -30,7 +30,7 @@ function RentalSteps({ isDarkMode }) {
           </p>
         </div>
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"}`}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
@@ -44,7 +44,7 @@ function RentalSteps({ isDarkMode }) {
           </p>
         </div>
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"}`}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
@@ -58,7 +58,7 @@ function RentalSteps({ isDarkMode }) {
           </p>
         </div>
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"}`}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
@@ -73,7 +73,7 @@ function RentalSteps({ isDarkMode }) {
           </p>
         </div>
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"}`}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
@@ -88,7 +88,7 @@ function RentalSteps({ isDarkMode }) {
           </p>
         </div>
         <div
-          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-950" : "bg-ternary-fade border-ternary"}`}
+          className={`p-5 rounded-xl hover:bg-accent duration-200 ease-linear cursor-pointer hover:[&>*:nth-child(1)]:text-secondary hover:[&>*:nth-child(2)]:text-text-secondary border-2 ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
         >
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}

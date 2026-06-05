@@ -53,7 +53,7 @@ function CarsIconSlider() {
             }}
           >
             <img
-              className="w-11 h-full"
+              className="w-8  lg:w-11 h-full aspect-square"
               src={`../../src/assets/images/cars_icons/${car.carImage}.png`}
               alt="car"
             />

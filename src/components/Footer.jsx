@@ -9,7 +9,7 @@ function Footer({ isDarkMode }) {
         CONTACTEZ NOUS
       </h3>
       <div
-        className={`flex flex-col mt-6 md:flex-row md:justify-between md:items-center gap-4  p-5  rounded-xl ${isDarkMode ? "bg-gray-900" : "bg-secondary"}`}
+        className={`flex flex-col mt-6 md:flex-row md:justify-between md:items-center border-2 gap-4  p-5  rounded-xl ${isDarkMode ? "bg-gray-900 border-gray-800 " : "bg-secondary "}`}
       >
         <div className="w-full md:w-1/2">
           <div className="text-ternary text-sm md:text-base">

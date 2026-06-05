@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cars from "./components/Cars";
 import Faq from "./components/Faq";
 import Footer from "./components/Footer";
@@ -9,11 +9,17 @@ import Carousel from "./components/Reviews";
 import ScrollTop from "./components/ScrollTop";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    JSON.parse(localStorage.getItem("mode")),
+  );
 
   function handleDarkMode() {
     setIsDarkMode((prev) => !prev);
   }
+
+  useEffect(() => {
+    localStorage.setItem("mode", isDarkMode);
+  }, [isDarkMode]);
 
   return (
     <div

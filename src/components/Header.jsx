@@ -52,8 +52,8 @@ function Header({ onDarkMode, isDarkMode }) {
           </div>
           <X
             onClick={() => setIsMenuShown(false)}
-            className="bg-red-400 p-1 rounded-full hover:bg-red-600 duration-200 ease-linear cursor-pointer"
-            size={28}
+            className="bg-red-400 p-0.5 rounded-full hover:bg-red-600 duration-200 ease-linear cursor-pointer"
+            size={24}
           />
         </div>
 
@@ -81,6 +81,13 @@ function Header({ onDarkMode, isDarkMode }) {
             <a href="#footer">Contact</a>
           </li>
         </ul>
+        <div
+          className={`${isDarkMode ? "text-ternary" : "text-secondary"} flex items-center justify-center gap-1.5 text-xs pb-2`}
+        >
+          <span>&copy;</span>
+          <span>{new Date().getFullYear()}</span>
+          <span>Tous les droits résérvés</span>
+        </div>
       </div>
       <div>
         <Menu

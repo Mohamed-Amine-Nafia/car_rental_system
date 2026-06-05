@@ -56,12 +56,12 @@ function Faq({ isDarkMode }) {
           return (
             <div key={faq.id} className="flex flex-col">
               <h4
-                onClick={() => setActive(index)}
-                className={` text-secondary py-2.5 px-4 cursor-pointer border-b  hover:bg-accent hover:text-secondary duration-200 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base ${isDarkMode ? "bg-gray-900 border-b-gray-900 text-ternary" : "bg-ternary-fade border-b-ternary text-secondary"} `}
+                onClick={() => setActive((i) => (i === index ? null : index))}
+                className={` text-secondary py-2.5 px-4 cursor-pointer border-b   hover:bg-accent hover:text-secondary duration-200 ease-linear rounded-xl inline-flex items-center justify-between text-sm md:text-base ${isDarkMode ? "bg-gray-900 border-b-gray-900 text-ternary" : "bg-ternary-fade border-b-ternary text-secondary"} } hover:[&>*:nth-child(1)]:text-secondary`}
               >
                 Q : {faq.q}
                 <span
-                  className={`${isActive === index ? "rotate-180" : "rotate-0"} duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"}`}
+                  className={`${isActive === index ? "rotate-180" : "rotate-0"}  duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"}`}
                 >
                   <ChevronDown />
                 </span>

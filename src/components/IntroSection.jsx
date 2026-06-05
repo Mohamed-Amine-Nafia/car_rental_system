@@ -29,7 +29,7 @@ function IntroSection({ isDarkMode }) {
               href="#cars-section"
               className={`py-2.5 px-8 rounded-full hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer ${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"}`}
             >
-              Reserver maintenant
+              Résérver maintenant
             </a>
           </div>
         </div>
