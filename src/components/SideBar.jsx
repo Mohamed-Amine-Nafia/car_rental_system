@@ -1,10 +1,12 @@
 import {
+  Bell,
   CarFront,
   KeyRound,
   LayoutDashboard,
   LogOut,
   Receipt,
   Road,
+  Settings,
   Users,
 } from "lucide-react";
 import { useState } from "react";
@@ -14,9 +16,11 @@ function SideBar() {
   return (
     <div className="flex justify-between items-center px-6 py-3 w-full ">
       <div className="flex items-center">
-        <h2 className="text-secondary text-3xl inline-flex font-medium font-gibed">
-          OUZLAF DRIVE
-        </h2>
+        <img
+          src="../../src/assets/images/logo.png"
+          alt="logo"
+          className="w-32"
+        />
       </div>
       <div className="flex items-center justify-between gap-4 ">
         <NavLink
@@ -46,7 +50,7 @@ function SideBar() {
         >
           {" "}
           <KeyRound size={20} strokeWidth={1.5} />
-          <span className="text-xs font-medium">Reservations</span>
+          <span className="text-xs font-medium">Résérvations</span>
         </NavLink>
         <NavLink
           to="/Clients"
@@ -69,9 +73,13 @@ function SideBar() {
           <span className="text-xs font-medium">Factures</span>
         </NavLink>
       </div>
-      <div className="text-ternary bg-secondary flex  items-center gap-2 cursor-pointer px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
-        <LogOut size={20} strokeWidth={1.5} />
-        <span className="text-xs font-medium">Deconnexion</span>
+      <div className="flex items-center gap-2.5">
+        <Bell size={25} strokeWidth={1.5} />
+        <Settings size={25} strokeWidth={1.5} />
+        <span className="text-xs font-medium inline-flex items-center gap-1.5 text-ternary bg-secondary cursor-pointer px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
+          <LogOut size={20} strokeWidth={1.5} />
+          Deconnexion
+        </span>
       </div>
     </div>
   );

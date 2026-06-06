@@ -1,11 +1,15 @@
 import { Check, Cross, CrossIcon, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function UpdateCar({ onUpdate, showUpdateForm, car }) {
+function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
   const [updateCar, setUpdateCar] = useState(car || {});
   const [updateMessage, setUpdateMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+
+  function handleRefresh(value) {
+    onRefresh(value);
+  }
 
   function handleChange(event) {
     const name = event.target.name;
@@ -19,7 +23,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car }) {
       const res = await fetch("http://localhost/car_rental/update-car.php", {
         method: "PATCH",
         headers: {
-          "Content-type": "Application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify(updateCar),
       });
@@ -80,7 +84,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car }) {
           type="text"
           id="plate"
           name="plate"
-          placeholder="??-?-?????"
+          placeholder="68-123456-أ"
           defaultValue={car.plate}
           onChange={handleChange}
         />
@@ -143,6 +147,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car }) {
           className="w-full py-2 inline-flex bg-secondary text-ternary mt-4 text-sm font-normal rounded-sm cursor-pointer hover:bg-accent hover:text-secondary transition duration-300 ease-linear"
           type="submit"
           value="Mettre à jour"
+          onClick={() => handleRefresh(true)}
         />
       </form>
       {(success || error) && (

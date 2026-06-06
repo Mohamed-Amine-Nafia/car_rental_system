@@ -1,8 +1,9 @@
-import { X } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 import { useState } from "react";
 
 function AddNewCar({ onClick, showform }) {
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     brand: "",
     model: "",
@@ -42,10 +43,8 @@ function AddNewCar({ onClick, showform }) {
 
       const result = await response.json();
 
-      console.log(result);
-
       if (result.success) {
-        alert("Car added successfully");
+        setMessage(result.message);
         onClick(false);
       } else {
         alert(result.message);
@@ -64,6 +63,7 @@ function AddNewCar({ onClick, showform }) {
       fuel: "",
       transmission: "",
     });
+    setMessage("");
   }
 
   return (
@@ -113,7 +113,7 @@ function AddNewCar({ onClick, showform }) {
           type="text"
           id="plate"
           name="plate"
-          placeholder="??-?-?????"
+          placeholder="68-123456-أ"
           onChange={handleChange}
           value={formData.plate}
         />
@@ -180,6 +180,15 @@ function AddNewCar({ onClick, showform }) {
           value="Ajouter"
         />
       </form>
+      {message && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary py-5 px-12 rounded-sm flex flex-col items-center gap-5">
+          <Check
+            className="bg-green-100 text-green-600 p-1 rounded-full"
+            size={32}
+          />
+          <p className="text-xs text-secondary text-center">{message}</p>
+        </div>
+      )}
     </div>
   );
 }

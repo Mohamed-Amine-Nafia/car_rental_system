@@ -1,6 +1,6 @@
 import { Check, Cog, Fuel, Search } from "lucide-react";
 import AddNewCar from "./AddNewCar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Await } from "react-router-dom";
 import UpdateCar from "./UpdateCar";
 
@@ -16,10 +16,13 @@ function Cars() {
   const [searchedCar, setSearchCar] = useState("");
   const [cars, setCars] = useState([]);
   const [activeCategory, setActiveCategory] = useState("tous");
-
   const [confirMessage, setConfirmMessage] = useState(false);
-
   const [carId, setCarId] = useState(null);
+  const [isRefresh, setIsRefresh] = useState(false);
+
+  function handleRefresh(value) {
+    setIsRefresh(value);
+  }
 
   function handleClick(value) {
     setShowAddCar(value);
@@ -48,9 +51,9 @@ function Cars() {
         console.log(error);
       }
     };
-
+    setIsRefresh(false);
     fetchCars();
-  }, []);
+  }, [isRefresh]);
 
   const filterdCars = cars.filter((car) => {
     const matchedStatus =
@@ -77,8 +80,12 @@ function Cars() {
     }
     setIsCarRemoved(true);
     setNotification(data.message);
-    console.log(data.message);
   };
+
+  function formatPlate(plate) {
+    const [region, number, letter] = plate.split("-");
+    return { number, letter, region };
+  }
 
   return (
     <div className="relative w-full h-full bg-primary  px-6 pt-3">
@@ -122,70 +129,81 @@ function Cars() {
         </div>
       </div>
       {/* Cars Container */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-4 overflow-y-scroll scroll-smooth scrollbar-none w-full h-4/5   text-sm mt-6 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4  gap-2 overflow-y-scroll scroll-smooth scrollbar-none w-full h-4/5   text-sm mt-6 ">
         {filterdCars.map((car) => {
+          const plate = formatPlate(car.plate);
           return (
             <div
               key={car.car_id}
-              className="relative  bg-ternary-fade rounded-xl min-h-72 max-h-72 cursor-pointer  flex flex-col justify-between"
+              className="relative  bg-ternary-fade rounded-xl h-54 cursor-pointer  flex flex-col justify-between"
             >
               <img
                 src={`http://localhost/car_rental/uploads/cars/${car.image}`}
                 alt=""
-                className="absolute w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  hover:scale-110 transition duration-300 ease-linear"
+                className="absolute w-4/6 lg:w-3/6 top-3/7 left-1/2 -translate-x-1/2 -translate-y-1/2  hover:scale-110 transition duration-300 ease-linear"
               />
-              <div className="flex items-center gap-3 px-5 py-3">
-                <img
-                  src={`../../src/assets/images/car-logo/${car.brand}.png`}
-                  alt="car"
-                  className="w-10"
-                />
-                <div className="flex flex-col whitespace-nowrap">
-                  <span className="text-xs font-semibold capitalize text-secondary">
-                    {car.brand} {car.model} {car.year}
-                  </span>
-                  <span className="text-xs text-text-secondary">
-                    <bdi>{car.plate}</bdi>
-                  </span>
+              <div className="flex items-center justify-between gap-2 p-2 ">
+                <div className="flex items-center gap-1.5">
+                  <img
+                    src={`../../src/assets/images/car-logo/${car.brand}.png`}
+                    alt="car"
+                    className="w-7"
+                  />
+                  <div className="flex flex-col whitespace-nowrap">
+                    <span className="text-xs font-medium capitalize text-secondary">
+                      {car.brand} {car.model} {car.year}
+                    </span>
+                    <span className="text-xs text-text-secondary" dir="ltr">
+                      {plate.number}-<span dir="rtl">{plate.letter}</span>-
+                      {plate.region}
+                    </span>
+                  </div>
                 </div>
                 <span
-                  className={`inline-flex capitalize ml-auto   px-4 py-2 text-xs rounded-2xl ${car.status === "disponible" && "bg-emerald-100 text-emerald-600"} ${car.status === "reservé" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
+                  className={`inline-flex capitalize    px-2 py-1.5 text-[10px] rounded-2xl ${car.status === "disponible" && "bg-emerald-100 text-emerald-600"} ${car.status === "reservé" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
                 >
                   {car.status}
                 </span>
               </div>
-              <div className="bg-ternary backdrop-blur-md flex items-center   px-5 py-3 rounded-br-xl rounded-bl-xl">
-                <div className="flex flex-col">
-                  <span className="text-[16px] font-medium text-secondary  ">
-                    {car.price}dh
-                    <span className="text-xs">/Jour</span>
-                  </span>
-                  <div className="flex gap-1 text-text-secondary">
-                    <Cog strokeWidth={2} size={16} />
-                    <span className="text-xs">{car.transmission}</span>
-                    <Fuel strokeWidth={2} size={16} />
-                    <span className="text-xs">{car.fuel}</span>
+              <div className="bg-ternary backdrop-blur-md flex items-center   p-2 rounded-br-xl rounded-bl-xl">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex flex-col">
+                    <span className="text-base font-medium text-secondary  ">
+                      {car.price}dh
+                      <span className="text-xs">/Jour</span>
+                    </span>
+                    <div className="flex gap-1 flex-col  text-[11px]  text-text-secondary">
+                      <span className=" inline-flex items-center gap-1">
+                        <Cog strokeWidth={2} size={15} />
+                        {car.transmission}
+                      </span>
+
+                      <span className="inline-flex items-center gap-1">
+                        <Fuel strokeWidth={2} size={15} />
+                        {car.fuel}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1.5 ml-auto">
-                  <button
-                    onClick={() => {
-                      setCarId(car.car_id);
-                      setConfirmMessage(true);
-                    }}
-                    className="inline-flex px-4 py-2 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
-                  >
-                    Supprimer
-                  </button>
-                  <button
-                    onClick={() => {
-                      setCarToUpdate(car);
-                      setShowUpdateCar(true);
-                    }}
-                    className="inline-flex px-4 py-2 bg-secondary text-ternary text-xs rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer"
-                  >
-                    Mettre à jour
-                  </button>
+                  <div className="flex items-center gap-1 ml-auto">
+                    <button
+                      onClick={() => {
+                        setCarId(car.car_id);
+                        setConfirmMessage(true);
+                      }}
+                      className="inline-flex px-2 py-1.5 bg-secondary text-ternary text-[11px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
+                    >
+                      Supprimer
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCarToUpdate(car);
+                        setShowUpdateCar(true);
+                      }}
+                      className="inline-flex px-2 py-1.5 bg-secondary text-ternary text-[11px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer whitespace-nowrap"
+                    >
+                      Mettre à jour
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -217,6 +235,7 @@ function Cars() {
           showUpdateForm={showUpdateCar}
           onUpdate={handleUpdate}
           car={carToUpdate}
+          onRefresh={handleRefresh}
         />
       )}
       {confirMessage && (
@@ -226,16 +245,17 @@ function Cars() {
           </p>
           <div className="flex items-center gap-5">
             <button
-              className="bg-red-300 py-2 px-4 text-sm rounded-sm hover:bg-red-400 duration-200 ease-linear cursor-pointer"
+              className="bg-red-100 py-1.5 px-4 text-sm rounded-full hover:bg-red-200 text-red-700 duration-200 ease-linear cursor-pointer"
               onClick={() => setConfirmMessage(false)}
             >
               Annuler
             </button>
             <button
-              className="bg-green-300 py-2 px-4 text-sm rounded-sm hover:bg-green-400 duration-200 ease-linear cursor-pointer"
+              className="bg-green-100 py-1.5 px-4 text-sm rounded-full hover:bg-green-200 text-green-700 duration-200 ease-linear cursor-pointer"
               onClick={() => {
                 handleCarDelete(carId);
                 setConfirmMessage(false);
+                setIsRefresh(true);
               }}
             >
               Supprimer
