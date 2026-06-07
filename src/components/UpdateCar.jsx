@@ -22,16 +22,19 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
     try {
       const res = await fetch("http://localhost/car_rental/update-car.php", {
         method: "PATCH",
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(updateCar),
       });
       const data = await res.json();
+      if (!res.ok) {
+        setUpdateMessage("Échec de la mise à jour de la voiture");
+      }
       setUpdateMessage("Voiture mise à jour avec succès");
       setSuccess(true);
     } catch (error) {
-      setUpdateMessage("Échec de la mise à jour de la voiture");
       setError(true);
       console.log(error);
     }

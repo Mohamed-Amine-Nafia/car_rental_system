@@ -38,12 +38,13 @@ function AddNewCar({ onClick, showform }) {
     try {
       const response = await fetch("http://localhost/car_rental/add-car.php", {
         method: "POST",
+        credentials: "include",
         body: data,
       });
 
       const result = await response.json();
 
-      if (result.success) {
+      if (!result.success) {
         setMessage(result.message);
         onClick(false);
       } else {

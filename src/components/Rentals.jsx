@@ -3,16 +3,19 @@ import { useEffect, useState } from "react";
 
 function Rentals() {
   const [rentals, setRentals] = useState([]);
-
   const [clients, setClients] = useState([]);
-
   const [cars, setCars] = useState([]);
+  const [isRefresh, setIsRefresh] = useState(false);
 
   useEffect(() => {
     const fetchRentals = async () => {
       try {
         const response = await fetch(
           "http://localhost/car_rental/fetch-rentals.php",
+          {
+            method: "GET",
+            credentials: "include",
+          },
         );
 
         if (!response.ok) {
@@ -29,13 +32,18 @@ function Rentals() {
       }
     };
     fetchRentals();
-  }, []);
+    setIsRefresh(false);
+  }, [isRefresh]);
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
         const response = await fetch(
           "http://localhost/car_rental/fetch-clients.php",
+          {
+            method: "GET",
+            credentials: "include",
+          },
         );
         if (!response.ok) {
           const errorText = response.text();
@@ -58,6 +66,10 @@ function Rentals() {
       try {
         const response = await fetch(
           "http://localhost/car_rental/fetch-cars.php",
+          {
+            method: "GET",
+            credentials: "include",
+          },
         );
         if (!response.ok) {
           const errorText = response.text();
@@ -111,6 +123,7 @@ function Rentals() {
         "http://localhost/car_rental/update-rentals.php",
         {
           method: "PATCH",
+          credentials: "include",
           headers: {
             "Content-type": "application/json",
           },
@@ -132,65 +145,78 @@ function Rentals() {
     }
   };
 
+  function plateFormat(plate) {
+    if (!plate) {
+      return {
+        region: "",
+        letter: "",
+        number: "",
+      };
+    }
+
+    const [number, region, letter] = plate.split("-");
+    return { region, letter, number };
+  }
+
   return (
     <div className="relative h-screen w-full bg-primary  p-6">
       <h2 className="text-2xl text-secondary font-semibold mt-6  border-b border-ternary pb-2.5">
         RESERVATIONS
       </h2>
       <div className="mt-10">
-        <div className={`flex items-center justify-between text-xs w-full`}>
+        <div className={`grid grid-cols-11 text-xs w-full`}>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary rounded-tl-full rounded-bl-full`}
+            className={`text-left  bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tl-full rounded-bl-full`}
           >
             N°
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             CLIENT:
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             TELEPHONE:
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             N° PERMIS
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             VEHICULE
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             MATRICULE
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             DEBUT
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
             FIN
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary `}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary `}
           >
             STATUS
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary `}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary `}
           >
             OPERATIONS
           </span>
           <span
-            className={`text-left bg-secondary text-ternary w-[12.5%] py-2  px-5 border-l border-ternary rounded-tr-full rounded-br-full`}
+            className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tr-full rounded-br-full`}
           >
             Prise en charge
           </span>
@@ -200,62 +226,54 @@ function Rentals() {
           rentals.map((rental, index) => {
             const client = getClientInfos(rental.client_id);
             const car = getCarInfos(rental.car_id);
+            const { region, letter, number } = plateFormat(car?.plate);
             return (
               <div
                 key={rental.id}
-                className="flex items-center text-sm bg-primary w-full h-10 rounded-full border border-gray-100 whitespace-nowrap text-left hover:bg-accent cursor-pointer duration-200 ease-linear"
+                className="grid grid-cols-11  text-sm bg-primary w-full h-10 rounded-full border border-gray-100 whitespace-nowrap text-left hover:bg-accent cursor-pointer duration-200 ease-linear"
               >
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5  `}
-                >
+                <span className={`text-left  text-secondary  py-2   px-5  `}>
                   {index + 1}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary py-2   px-5 `}>
                   {client?.name}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary  py-2   px-5 `}>
                   {client?.phone}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary  py-2   px-5 `}>
                   {client?.license}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary  py-2   px-5 `}>
                   {car?.brand} {car?.model}
                 </span>
                 <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
+                  dir="ltr"
+                  className={`text-left  text-secondary  py-2   px-5 `}
                 >
-                  {car?.plate}
+                  {region}-<span dir="rtl">{letter}</span>-{number}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary py-2   px-5 `}>
                   {rental.start_date}
                 </span>
-                <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
-                >
+                <span className={`text-left  text-secondary  py-2   px-5 `}>
                   {rental.end_date}
                 </span>
                 <span
-                  className={`text-left  w-[12.5%] py-2 rounded-full h-fit   px-5 ${rental.status === "PENDING" && " text-orange-600"} ${rental.status === "CANCELLED" && " text-red-600"} ${rental.status === "CONFIRMED" && " text-emerald-600"} ${rental.status === "ACTIVE" && " text-violet-600"}`}
+                  className={`text-left   py-2 rounded-full h-fit   px-5 ${rental.status === "PENDING" && " text-orange-600"} ${rental.status === "CANCELLED" && " text-red-600"} ${rental.status === "CONFIRMED" && " text-emerald-600"} ${rental.status === "ACTIVE" && " text-violet-600"}`}
                 >
-                  {rental.status}
+                  {rental.status === "PENDING" && "En attente"}
+                  {rental.status === "CANCELLED" && "Annulé"}
+                  {rental.status === "CONFIRMED" && "Confirmé"}
+                  {rental.status === "ACTIVE" && "Actif"}
                 </span>
-                <div className="relative w-[12.5%]">
+                <div className="relative">
                   <select
                     value={rental.status}
-                    onChange={(e) =>
-                      handleStatusChange(rental.id, e.target.value)
-                    }
+                    onChange={(e) => {
+                      handleStatusChange(rental.id, e.target.value);
+                      setIsRefresh(true);
+                    }}
                     name="status"
                     id="status"
                     className={`appearance-none w-full border border-transparent rounded px-3 py-2 pr-8 outline-none`}
@@ -272,7 +290,7 @@ function Rentals() {
                   />
                 </div>
                 <span
-                  className={`text-left  text-secondary w-[12.5%] py-2   px-5 `}
+                  className={`text-center  text-secondary text-xs py-2 whitespace-break-spaces   px-5 `}
                 >
                   {rental.status === "ACTIVE" ? rental.pickup_at : null}
                 </span>

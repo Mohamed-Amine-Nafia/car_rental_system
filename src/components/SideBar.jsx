@@ -12,7 +12,27 @@ import {
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext"; // adjust path if needed
+
 function SideBar() {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost/car_rental/logout.php", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex justify-between items-center px-6 py-3 w-full ">
       <div className="flex items-center">
@@ -24,7 +44,7 @@ function SideBar() {
       </div>
       <div className="flex items-center justify-between gap-4 ">
         <NavLink
-          to="/"
+          to="/Dashboard"
           className={({ isActive }) =>
             ` flex items-center  gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
           }
@@ -76,10 +96,13 @@ function SideBar() {
       <div className="flex items-center gap-2.5">
         <Bell size={25} strokeWidth={1.5} />
         <Settings size={25} strokeWidth={1.5} />
-        <span className="text-xs font-medium inline-flex items-center gap-1.5 text-ternary bg-secondary cursor-pointer px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary">
+        <button
+          onClick={handleLogout}
+          className="text-xs font-medium inline-flex items-center gap-1.5 text-ternary bg-secondary cursor-pointer px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary"
+        >
           <LogOut size={20} strokeWidth={1.5} />
           Deconnexion
-        </span>
+        </button>
       </div>
     </div>
   );
