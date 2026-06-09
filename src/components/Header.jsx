@@ -38,7 +38,7 @@ function Header({ onDarkMode, isDarkMode }) {
                   src="../../src/assets/images/morocco.png"
                   alt="morocco flag"
                 />
-                Ar
+                ع
               </span>
             </div>
             <div
@@ -140,7 +140,7 @@ function Header({ onDarkMode, isDarkMode }) {
               src="../../src/assets/images/morocco.png"
               alt="morocco flag"
             />
-            Ar
+            ع
           </span>
         </div>
         <div

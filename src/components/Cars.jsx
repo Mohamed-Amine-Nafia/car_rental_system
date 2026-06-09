@@ -6,6 +6,11 @@ function Cars({ isDarkMode }) {
   const [reservedCar, setReservedCar] = useState(null);
   const [isFormShown, setIsFormShown] = useState(false);
 
+  const [rentalId, setRentalId] = useState(null);
+  // CHANGED: We now track the PDF file path instead of raw HTML string
+  const [contractFilePath, setContractFilePath] = useState("");
+  const [showContract, setShowContract] = useState(false);
+
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -17,11 +22,13 @@ function Cars({ isDarkMode }) {
     license: "",
   });
 
+  const [carId, setCarId] = useState(null);
+
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const response = await fetch(
-          "http://localhost/car_rental/fetch-cars.php",
+          "http://localhost/car_rental/fetch-available-cars.php",
         );
         const data = await response.json();
 
@@ -82,13 +89,79 @@ function Cars({ isDarkMode }) {
         setErrorMessage(data.message || "Erreur serveur");
         return;
       }
+      if (response.ok && data.success) {
+        await handleCarStatus(reservedCar.car_id, "reservé");
+
+        setSuccessMessage(data.message);
+
+        const newRentalId = data.rental_id;
+        setRentalId(newRentalId);
+
+        setTimeout(() => {
+          setIsFormShown(false);
+
+          window.dispatchEvent(
+            new CustomEvent("open-contract", {
+              detail: { rentalId: newRentalId },
+            }),
+          );
+        }, 800);
+      }
 
       setSuccessMessage(data.message);
     } catch (error) {
       setErrorMessage(error.message);
     }
   };
-  const availableCars = cars.filter((car) => car.status === "disponible");
+
+  // CHANGED: Listens for rentalId to request the file path from PHP
+  useEffect(() => {
+    if (!rentalId) return;
+
+    const fetchContract = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost/car_rental/create-contract.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              rental_id: rentalId,
+            }),
+          },
+        );
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          setContractFilePath(data.file_path); // Save file path path from database response
+          setShowContract(true); // Reveal the modal layout window
+        } else {
+          console.error("Error generating contract:", data.message);
+        }
+      } catch (error) {
+        console.log("Connection error:", error);
+      }
+    };
+
+    fetchContract();
+  }, [rentalId]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      const targetId = e.detail.rentalId;
+      console.log("OPEN CONTRACT FOR:", targetId);
+      setRentalId(targetId);
+    };
+
+    window.addEventListener("open-contract", handler);
+
+    return () => {
+      window.removeEventListener("open-contract", handler);
+    };
+  }, []);
 
   const handleClick = (item) => {
     const clientChoice = cars.find((car) => car.car_id === item.car_id);
@@ -105,15 +178,40 @@ function Cars({ isDarkMode }) {
   function calculateDays(startDate, endDate) {
     const start = new Date(startDate);
     const end = new Date(endDate);
-
     const diffTime = end - start;
-
     const diffDays = diffTime / (1000 * 60 * 60 * 24);
-
     return diffDays;
   }
 
   const rentalDays = calculateDays(rentalInfos.startDate, rentalInfos.endDate);
+
+  function plateFormat(plate) {
+    const [number, region, letter] = plate.split("-");
+    return { region, letter, number };
+  }
+
+  const handleCarStatus = async (id, newStatus) => {
+    try {
+      const res = await fetch("http://localhost/car_rental/reserved-car.php", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          car_id: id,
+          status: newStatus,
+        }),
+      });
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Error: ${errorText}`);
+      }
+      const data = await res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div id="cars-section" className="p-5 mt-4 md:mt-10 lg:mt-16 relative">
@@ -130,14 +228,15 @@ function Cars({ isDarkMode }) {
         </span>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-10">
-        {availableCars.map((car) => {
+        {cars.map((car) => {
+          const plate = plateFormat(car.plate);
           return (
             <div
               className={`relative flex flex-col justify-between h-70 border-2  rounded-xl cursor-pointer ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary "}`}
               key={car.car_id}
             >
               <img
-                className="absolute w-5/6 md:w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 duration-300 ease-linear"
+                className="absolute w-4/6 md:w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 duration-300 ease-linear"
                 src={`http://localhost/car_rental/uploads/cars/${car.image}`}
                 alt="car"
               />
@@ -158,11 +257,18 @@ function Cars({ isDarkMode }) {
                   >
                     {car.model}
                   </span>
+                  <span
+                    className={`ml-1 text-xs  ${isDarkMode ? "text-ternary" : "text-text-secondary"}`}
+                  >
+                    {car.year}
+                  </span>
                   <br />
                   <span
-                    className={` ${isDarkMode ? "text-ternary" : "text-text-secondary"}`}
+                    dir="ltr"
+                    className={` ${isDarkMode ? "text-ternary" : "text-text-secondary"} text-sm`}
                   >
-                    {car.plate}
+                    {plate.region}-<span dir="rtl">{plate.letter}</span>-
+                    {plate.number}
                   </span>
                 </div>
               </div>
@@ -194,8 +300,11 @@ function Cars({ isDarkMode }) {
                   </span>
                 </div>
                 <button
-                  onClick={() => handleClick(car)}
-                  className={`absolute top-1/2 -translate-y-1/2 right-3   py-1.5 px-4 rounded-full text-sm  hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer ${isDarkMode ? "bg-ternary text-secondary" : "bg-secondary text-ternary"}`}
+                  onClick={() => {
+                    handleClick(car);
+                    setCarId(car.car_id);
+                  }}
+                  className={`absolute top-1/2 -translate-y-1/2 right-3  py-1.5 px-4 rounded-full text-sm  hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer ${isDarkMode ? "bg-ternary text-secondary" : "bg-secondary text-ternary"}`}
                 >
                   Résérver
                 </button>
@@ -204,10 +313,11 @@ function Cars({ isDarkMode }) {
           );
         })}
       </div>
+
       {/**THE RESERVATION FORM */}
       {reservedCar && isFormShown && (
         <div
-          className={`absolute w-11/12 md:max-w-11/12 lg:max-w-3/4 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col md:flex-row  rounded-lg p-3 ${isDarkMode ? "bg-gray-900 text-ternary" : "bg-ternary text-secondary"}`}
+          className={`absolute w-11/12 md:max-w-11/12 lg:max-w-3/4 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col md:flex-row  rounded-lg p-3 z-40 ${isDarkMode ? "bg-gray-900 text-ternary" : "bg-ternary text-secondary"}`}
         >
           <span
             onClick={() => {
@@ -269,12 +379,17 @@ function Cars({ isDarkMode }) {
                 réservation
               </p>
             </div>
-            <form onSubmit={(e) => handleSubmit(e)} className="mt-8 text-sm">
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+              className="mt-8 text-sm"
+            >
               <label htmlFor="start-date">PRISE EN CHARGE</label>
 
               <input
                 onChange={handleChange}
-                className={`w-full   text-accent py-2 px-2.5 rounded-md my-2.5 [&::-webkit-calendar-picker-indicator]:invert ${isDarkMode ? "bg-gray-800" : "bg-secondary"}`}
+                className={`w-full  text-accent py-2 px-2.5 rounded-md my-2.5 [&::-webkit-calendar-picker-indicator]:invert ${isDarkMode ? "bg-gray-800" : "bg-secondary"}`}
                 type="date"
                 name="startDate"
                 id="start-date"
@@ -283,7 +398,7 @@ function Cars({ isDarkMode }) {
               <label htmlFor="end-date">RESTITUTION</label>
               <input
                 onChange={handleChange}
-                className={`w-full   text-accent py-2 px-2.5 rounded-md my-2.5 [&::-webkit-calendar-picker-indicator]:invert ${isDarkMode ? "bg-gray-800" : "bg-secondary"}`}
+                className={`w-full  text-accent py-2 px-2.5 rounded-md my-2.5 [&::-webkit-calendar-picker-indicator]:invert ${isDarkMode ? "bg-gray-800" : "bg-secondary"}`}
                 type="date"
                 name="endDate"
                 id="end-date"
@@ -334,7 +449,7 @@ function Cars({ isDarkMode }) {
           </div>
           {(successMessage || errorMessage) && (
             <div
-              className={`py-5 px-10 rounded-md flex flex-col gap-5 border-2 ${isDarkMode ? "bg-gray-800 text-ternary border-gray-700" : "bg-primary text-secondary border-gray-400"} absolute w-4/5 md:w-3/5 justify-center items-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
+              className={`py-5 px-10 rounded-md flex flex-col gap-5 border-2 ${isDarkMode ? "bg-gray-800 text-ternary border-gray-700" : "bg-primary text-secondary border-gray-400"} absolute w-4/5 md:w-3/5 justify-center items-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50`}
             >
               {successMessage && (
                 <Check
@@ -368,6 +483,51 @@ function Cars({ isDarkMode }) {
               </button>
             </div>
           )}
+        </div>
+      )}
+
+      {/** CHANGED: CONTRACT MODAL RENDERING PREVIEW VIA IFRAME */}
+      {showContract && contractFilePath && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white text-black w-11/12 max-w-4xl h-[85vh] rounded-xl p-4 flex flex-col shadow-2xl">
+            <div className="flex justify-between items-center mb-3 pb-2 border-b">
+              <h3 className="text-lg font-semibold text-gray-800">
+                Aperçu du Contrat
+              </h3>
+              <button
+                onClick={() => {
+                  setShowContract(false);
+                  setRentalId(null);
+                }}
+                className="text-gray-500 hover:text-red-500 transition-colors"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Embedded Native Browser PDF View */}
+            <div className="flex-1 w-full bg-gray-100 rounded overflow-hidden">
+              <iframe
+                src={`http://localhost/car_rental/${contractFilePath}`}
+                width="100%"
+                height="100%"
+                className="border-0"
+                title="Contrat PDF"
+              />
+            </div>
+
+            <div className="mt-3 flex justify-end">
+              <button
+                onClick={() => {
+                  setShowContract(false);
+                  setRentalId(null);
+                }}
+                className="px-5 py-2 bg-gray-900 text-white font-medium text-sm rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
