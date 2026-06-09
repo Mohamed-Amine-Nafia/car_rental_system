@@ -1,8 +1,8 @@
-import { Check, X } from "lucide-react";
+import { Check, LogIn, X } from "lucide-react";
 
 import { useState } from "react";
 
-function AddNewCar({ onClick, showform }) {
+function AddNewCar({ onClick, showform, onRefresh }) {
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     brand: "",
@@ -24,6 +24,7 @@ function AddNewCar({ onClick, showform }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setMessage("");
 
     const data = new FormData();
 
@@ -45,14 +46,12 @@ function AddNewCar({ onClick, showform }) {
       const result = await response.json();
 
       if (!result.success) {
-        setMessage(result.message);
-        onClick(false);
-      } else {
-        alert(result.message);
+        setMessage("Une erreur est survenue lors de l'ajout de la voiture.");
       }
+      setMessage("La voiture a été ajoutée avec réussite");
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      console.log("Something went wrong");
     }
     setFormData({
       brand: "",
@@ -64,7 +63,6 @@ function AddNewCar({ onClick, showform }) {
       fuel: "",
       transmission: "",
     });
-    setMessage("");
   }
 
   return (
@@ -182,12 +180,22 @@ function AddNewCar({ onClick, showform }) {
         />
       </form>
       {message && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary py-5 px-12 rounded-sm flex flex-col items-center gap-5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary py-5 px-12 rounded-sm flex flex-col items-center gap-4">
           <Check
             className="bg-green-100 text-green-600 p-1 rounded-full"
             size={32}
           />
           <p className="text-xs text-secondary text-center">{message}</p>
+          <button
+            onClick={() => {
+              onClick(false);
+              setMessage("");
+              onRefresh(true);
+            }}
+            className="bg-secondary text-ternary py-1.5 px-4 text-sm rounded-full cursor-pointer hover:bg-accent hover:text-secondary duration-200 ease-linear"
+          >
+            D'accord!
+          </button>
         </div>
       )}
     </div>

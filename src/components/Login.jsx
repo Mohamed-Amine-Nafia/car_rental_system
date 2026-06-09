@@ -44,11 +44,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary  px-4">
-      <div className="w-full max-w-md bg-secondary border border-gray-800 rounded-xl p-8 pt-4">
+    <div className="min-h-screen flex items-center justify-center bg-secondary  px-4">
+      <div className="w-full max-w-md bg-slate-100 border border-gray-800 rounded-xl p-8 pt-4">
         <div className="flex items-center justify-center">
           <UserKey
-            className="text-secondary  bg-ternary-fade p-1.5 rounded-full"
+            className="text-secondary  bg-slate-300 p-1.5 rounded-full"
             size={52}
             strokeWidth={1.5}
           />
@@ -65,7 +65,7 @@ export default function Login() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full py-2 px-7 rounded bg-ternary-fade"
+              className="w-full py-2 px-7 rounded bg-slate-200"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -79,7 +79,7 @@ export default function Login() {
             <input
               type="password"
               placeholder="Mot de passe"
-              className="w-full py-2 px-7 rounded bg-ternary-fade"
+              className="w-full py-2 px-7 rounded bg-slate-200"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -88,7 +88,7 @@ export default function Login() {
               className="absolute top-1/2 -translate-y-1/2 left-1.5"
             />
           </div>
-          <div className="text-xs text-ternary">
+          <div className="text-xs text-slate-500">
             <p>Email demo: demo@agency.com</p>
             <p>Mot de passe demo: 123456</p>
           </div>
@@ -96,14 +96,18 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-accent py-2 px-3 h-10  rounded text-secondary text-base relative inline-flex items-center gap-1 justify-center cursor-pointer hover:bg-[#15ff00] duration-200 ease-linear"
+            className="w-full bg-secondary py-2 px-3 h-10  rounded text-ternary text-base relative inline-flex items-center gap-1 justify-center cursor-pointer hover:bg-accent hover:text-secondary duration-200 ease-linear"
           >
             {loading ? (
               <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-6 w-6 rounded-full bg-transparent border-2 border-ternary border-r-secondary animate-spin "></div>
             ) : (
               "Connexion"
             )}
-            <LogInIcon size={19} strokeWidth={1.5} />
+            <LogInIcon
+              size={19}
+              strokeWidth={1.5}
+              className={`${loading ? "hidden" : null} `}
+            />
           </button>
         </form>
       </div>

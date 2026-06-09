@@ -36,6 +36,7 @@ function Cars() {
   }
 
   useEffect(() => {
+    setIsRefresh(false);
     const fetchCars = async () => {
       try {
         const res = await fetch("http://localhost/car_rental/fetch-cars.php");
@@ -51,7 +52,7 @@ function Cars() {
         console.log(error);
       }
     };
-    setIsRefresh(false);
+
     fetchCars();
   }, [isRefresh]);
 
@@ -67,6 +68,7 @@ function Cars() {
   const handleCarDelete = async (id) => {
     const res = await fetch("http://localhost/car_rental/delete-car.php", {
       method: "DELETE",
+      credentials: "include",
       headers: {
         "Content-type": "application/json",
       },
@@ -112,7 +114,7 @@ function Cars() {
                   setIsActive(index);
                   setActiveCategory(item.toLowerCase());
                 }}
-                className={`inline-block  px-5 py-2 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-secondary" : "bg-secondary text-ternary"}`}
+                className={`inline-block  px-5 py-2 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-ternary" : "bg-secondary text-ternary"}`}
               >
                 {item}
               </span>
@@ -122,7 +124,7 @@ function Cars() {
         <div className="flex flex-1 justify-end text-xs">
           <button
             onClick={() => setShowAddCar(true)}
-            className="inline-flex items-center bg-accent text-secondary px-6 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
+            className="inline-flex items-center bg-accent text-ternary px-6 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
           >
             Ajouter une voiture
           </button>
@@ -210,7 +212,11 @@ function Cars() {
           );
         })}
       </div>
-      <AddNewCar showform={showAddCar} onClick={handleClick} />
+      <AddNewCar
+        showform={showAddCar}
+        onClick={handleClick}
+        onRefresh={handleRefresh}
+      />
 
       {/* CAR REMOVING NOTIFICATION */}
       {isCarRemoved && (

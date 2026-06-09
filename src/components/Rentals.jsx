@@ -138,8 +138,6 @@ function Rentals() {
         throw new Error(`Error: ${errorText}`);
       }
       const data = await response.json();
-
-      console.log(data.message);
     } catch (error) {
       console.log(error);
     }
@@ -164,7 +162,7 @@ function Rentals() {
         RESERVATIONS
       </h2>
       <div className="mt-10">
-        <div className={`grid grid-cols-11 text-xs w-full`}>
+        <div className={`grid grid-cols-11 text-xs w-full whitespace-nowrap`}>
           <span
             className={`text-left  bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tl-full rounded-bl-full`}
           >
@@ -218,7 +216,7 @@ function Rentals() {
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tr-full rounded-br-full`}
           >
-            Prise en charge
+            PRISE EN CHARGE
           </span>
         </div>
 
@@ -244,7 +242,9 @@ function Rentals() {
                 <span className={`text-left  text-secondary  py-2   px-5 `}>
                   {client?.license}
                 </span>
-                <span className={`text-left  text-secondary  py-2   px-5 `}>
+                <span
+                  className={`text-left  text-secondary  py-2   px-5 capitalize`}
+                >
                   {car?.brand} {car?.model}
                 </span>
                 <span
@@ -260,15 +260,19 @@ function Rentals() {
                   {rental.end_date}
                 </span>
                 <span
-                  className={`text-left   py-2 rounded-full h-fit   px-5 ${rental.status === "PENDING" && " text-orange-600"} ${rental.status === "CANCELLED" && " text-red-600"} ${rental.status === "CONFIRMED" && " text-emerald-600"} ${rental.status === "ACTIVE" && " text-violet-600"}`}
+                  className={`text-left   py-2 rounded-full h-fit   px-5 ${rental.status === "PENDING" && " text-orange-600"} ${rental.status === "CANCELLED" && " text-red-600"} ${rental.status === "CONFIRMED" && " text-emerald-600"} ${rental.status === "ACTIVE" && " text-violet-600"} ${rental.status === "EXPIRED" && "text-blue-600"}`}
                 >
                   {rental.status === "PENDING" && "En attente"}
                   {rental.status === "CANCELLED" && "Annulé"}
                   {rental.status === "CONFIRMED" && "Confirmé"}
                   {rental.status === "ACTIVE" && "Actif"}
+                  {rental.status === "EXPIRED" && "Expiré"}
                 </span>
                 <div className="relative">
                   <select
+                    disabled={
+                      rental.status === "ACTIVE" || rental.status === "EXPIRED"
+                    }
                     value={rental.status}
                     onChange={(e) => {
                       handleStatusChange(rental.id, e.target.value);
@@ -276,7 +280,7 @@ function Rentals() {
                     }}
                     name="status"
                     id="status"
-                    className={`appearance-none w-full border border-transparent rounded px-3 py-2 pr-8 outline-none`}
+                    className={`appearance-none w-full border border-transparent rounded px-3 py-2 pr-8 outline-none disabled:cursor-not-allowed`}
                   >
                     <option value="">Choisir</option>
                     <option value="CANCELLED">Annulé</option>
@@ -292,7 +296,9 @@ function Rentals() {
                 <span
                   className={`text-center  text-secondary text-xs py-2 whitespace-break-spaces   px-5 `}
                 >
-                  {rental.status === "ACTIVE" ? rental.pickup_at : null}
+                  {rental.status === "ACTIVE" || rental.status === "EXPIRED"
+                    ? rental.pickup_at
+                    : null}
                 </span>
               </div>
             );

@@ -46,7 +46,7 @@ function SideBar() {
         <NavLink
           to="/Dashboard"
           className={({ isActive }) =>
-            ` flex items-center  gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center  gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-ternary" : " text-ternary bg-secondary"}`
           }
         >
           <LayoutDashboard size={20} strokeWidth={1.5} />
@@ -55,17 +55,17 @@ function SideBar() {
         <NavLink
           to="/Cars"
           className={({ isActive }) =>
-            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-ternary" : " text-ternary bg-secondary"}`
           }
         >
           <CarFront size={20} strokeWidth={1.5} />
-          <span className="text-xs font-medium">Flotte</span>
+          <span className="text-xs font-medium">Voitures</span>
         </NavLink>
 
         <NavLink
           to="/Rentals"
           className={({ isActive }) =>
-            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-ternary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
@@ -75,7 +75,7 @@ function SideBar() {
         <NavLink
           to="/Clients"
           className={({ isActive }) =>
-            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-ternary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
@@ -85,12 +85,12 @@ function SideBar() {
         <NavLink
           to="/Invoices"
           className={({ isActive }) =>
-            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-secondary" : " text-ternary bg-secondary"}`
+            ` flex  items-center gap-2 cursor-pointer  px-5 py-2 rounded-full hover:bg-accent transition-all duration-300 ease-linear hover:text-secondary ${isActive ? "bg-accent text-ternary" : " text-ternary bg-secondary"}`
           }
         >
           {" "}
           <Receipt size={20} strokeWidth={1.5} />
-          <span className="text-xs font-medium">Factures</span>
+          <span className="text-xs font-medium">Contrats</span>
         </NavLink>
       </div>
       <div className="flex items-center gap-2.5">
