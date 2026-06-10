@@ -6,6 +6,7 @@ import {
   LogOut,
   Receipt,
   Road,
+  Scroll,
   Settings,
   Users,
 } from "lucide-react";
@@ -89,7 +90,7 @@ function SideBar() {
           }
         >
           {" "}
-          <Receipt size={20} strokeWidth={1.5} />
+          <Scroll size={20} strokeWidth={1.5} />
           <span className="text-xs font-medium">Contrats</span>
         </NavLink>
       </div>

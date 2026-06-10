@@ -100,7 +100,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               Voitures disponibles
@@ -120,7 +120,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               total de résérvations
@@ -136,7 +136,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               résérvations en attente
@@ -155,7 +155,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               locations en cours
@@ -173,7 +173,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               Voitures à retourner
@@ -191,7 +191,7 @@ function Dashboard() {
               className=" text-accent"
               size={52}
               strokeWidth={1.5}
-              fill="#ef233c"
+              fill="#ff0054"
             />
             <span className=" font-medium text-secondary uppercase">
               locations en retard

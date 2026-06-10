@@ -1,4 +1,13 @@
-import { Check, Cog, Fuel, Search } from "lucide-react";
+import {
+  Check,
+  Cog,
+  Fuel,
+  Plus,
+  Recycle,
+  Search,
+  Trash2,
+  Undo2,
+} from "lucide-react";
 import AddNewCar from "./AddNewCar";
 import { useEffect, useState } from "react";
 import { Await } from "react-router-dom";
@@ -124,9 +133,10 @@ function Cars() {
         <div className="flex flex-1 justify-end text-xs">
           <button
             onClick={() => setShowAddCar(true)}
-            className="inline-flex items-center bg-accent text-ternary px-6 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
+            className="inline-flex items-center gap-2 bg-accent text-ternary px-4 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
           >
             Ajouter une voiture
+            <Plus size={20} />
           </button>
         </div>
       </div>
@@ -192,7 +202,7 @@ function Cars() {
                         setCarId(car.car_id);
                         setConfirmMessage(true);
                       }}
-                      className="inline-flex px-2 py-1.5 bg-secondary text-ternary text-[11px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary text-ternary text-[10px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
                     >
                       Supprimer
                     </button>
@@ -201,7 +211,7 @@ function Cars() {
                         setCarToUpdate(car);
                         setShowUpdateCar(true);
                       }}
-                      className="inline-flex px-2 py-1.5 bg-secondary text-ternary text-[11px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer whitespace-nowrap"
+                      className="inline-flex px-3 py-1.5 bg-secondary text-ternary text-[10px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer whitespace-nowrap"
                     >
                       Mettre à jour
                     </button>
@@ -245,19 +255,19 @@ function Cars() {
         />
       )}
       {confirMessage && (
-        <div className="absolute border-2 border-secondary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-primary py-8 px-8 rounded-md flex flex-col items-center gap-5">
-          <p className="text-sm">
+        <div className="absolute border border-secondary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-primary py-8 px-8 rounded-md flex flex-col items-center gap-5">
+          <p className="text-[12px]">
             Êtes-vous sûr de vouloir supprimer cette voiture ?
           </p>
           <div className="flex items-center gap-5">
             <button
-              className="bg-red-100 py-1.5 px-4 text-sm rounded-full hover:bg-red-200 text-red-700 duration-200 ease-linear cursor-pointer"
+              className="bg-accent py-1.5 px-4 text-xs rounded-full hover:bg-secondary text-ternary duration-200 ease-linear cursor-pointer"
               onClick={() => setConfirmMessage(false)}
             >
               Annuler
             </button>
             <button
-              className="bg-green-100 py-1.5 px-4 text-sm rounded-full hover:bg-green-200 text-green-700 duration-200 ease-linear cursor-pointer"
+              className="bg-secondary py-1.5 px-4 text-xs rounded-full hover:bg-accent text-ternary duration-200 ease-linear cursor-pointer"
               onClick={() => {
                 handleCarDelete(carId);
                 setConfirmMessage(false);

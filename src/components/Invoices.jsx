@@ -36,36 +36,35 @@ function Invoices() {
   if (loading) return <div>Chargement des contrats...</div>;
   if (error) return <div>Erreur : {error}</div>;
   return (
-    <div className="dashboard-container">
-      <h2>Liste des Contrats</h2>
-      <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Client</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contracts.map((contract) => (
-            <tr key={contract.id}>
-              <td>{contract.id}</td>
-              <td>{contract.client_name}</td>
-              <td>{contract.license}</td>
-              <td>{contract.created_at}</td>
-              <td>
-                <button
-                  onClick={() => handleDownload(contract.id)}
-                  style={{ padding: "8px 16px", cursor: "pointer" }}
-                >
-                  Télécharger PDF
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="dashboard-container p-5">
+      <h2 className="uppercase text-xl font-medium">Liste des Contrats</h2>
+
+      <div className="w-full grid grid-cols-5 mt-5 bg-secondary text-ternary rounded-full text-sm uppercase">
+        <span className="py-2 px-4 ">N°</span>
+        <span className="py-2 px-4">Client</span>
+        <span className="py-2 px-4">N° PERMIS</span>
+        <span className="py-2 px-4">Date</span>
+        <span className="py-2 px-4">Action</span>
+      </div>
+
+      {contracts.map((contract) => (
+        <div
+          key={contract.id}
+          className="w-full grid grid-cols-5 bg-primary border border-gray-100 rounded-full text-sm"
+        >
+          <span className="py-2 px-4">{contract.id}</span>
+          <span className="py-2 px-4">{contract.client_name}</span>
+          <span className="py-2 px-4">{contract.license}</span>
+          <span className="py-2 px-4">{contract.created_at}</span>
+
+          <button
+            onClick={() => handleDownload(contract.id)}
+            className="py-2 px-4 text-accent hover:text-secondary duration-200 ease-linear cursor-pointer"
+          >
+            Télécharger PDF
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

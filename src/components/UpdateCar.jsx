@@ -169,16 +169,25 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
 
       {(success || error) && (
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border ${
-            success ? "border-green-400" : "border-red-400"
-          } bg-primary rounded-md py-5 px-8 flex flex-col gap-5 items-center`}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-secondary bg-primary rounded-md py-5 px-8 flex flex-col gap-2 items-center`}
         >
           {success && (
-            <Check className="text-green-600 bg-green-100 p-1 rounded-full" />
+            <Check
+              size={28}
+              className="text-green-600 bg-green-100 p-1 rounded-full"
+            />
           )}
-          {error && <X className="text-red-600 bg-red-100 p-1 rounded-full" />}
+          {error && (
+            <X size={28} className="text-red-600 bg-red-100 p-1 rounded-full" />
+          )}
 
-          <p className="text-sm text-center">{updateMessage}</p>
+          <p className="text-[12px] text-center">{updateMessage}</p>
+          <button
+            onClick={() => onUpdate(false)}
+            className="text-xs inline-flex items-center bg-secondary text-ternary hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer py-1.5 px-3 rounded-full mt-2.5"
+          >
+            D'accord
+          </button>
         </div>
       )}
     </div>
