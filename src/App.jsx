@@ -13,6 +13,12 @@ function App() {
     JSON.parse(localStorage.getItem("mode")),
   );
 
+  const [isLanguage, setIsLanguage] = useState("");
+
+  function handleLanguageChange(value) {
+    setIsLanguage(value);
+  }
+
   function handleDarkMode() {
     setIsDarkMode((prev) => !prev);
   }
@@ -23,15 +29,20 @@ function App() {
 
   return (
     <div
-      className={`min-w-full min-h-dvh ${isDarkMode ? "bg-slate-950" : "bg-primary"} font-Poppins scroll-smooth duration-300 ease-linear`}
+      className={`min-w-full min-h-dvh ${isDarkMode ? "bg-slate-950" : "bg-primary"} ${isLanguage === "fr" ? "font-Poppins" : "font-Cairo"} scroll-smooth duration-300 ease-linear`}
     >
-      <Header onDarkMode={handleDarkMode} isDarkMode={isDarkMode} />
-      <IntroSection isDarkMode={isDarkMode} />
-      <Cars isDarkMode={isDarkMode} />
-      <RentalSteps isDarkMode={isDarkMode} />
-      <Faq isDarkMode={isDarkMode} />
-      <Carousel isDarkMode={isDarkMode} />
-      <Footer isDarkMode={isDarkMode} />
+      <Header
+        onDarkMode={handleDarkMode}
+        isDarkMode={isDarkMode}
+        onLanguageChange={handleLanguageChange}
+        language={isLanguage}
+      />
+      <IntroSection isDarkMode={isDarkMode} language={isLanguage} />
+      <Cars isDarkMode={isDarkMode} language={isLanguage} />
+      <RentalSteps isDarkMode={isDarkMode} language={isLanguage} />
+      <Faq isDarkMode={isDarkMode} language={isLanguage} />
+      <Carousel isDarkMode={isDarkMode} language={isLanguage} />
+      <Footer isDarkMode={isDarkMode} language={isLanguage} />
       <ScrollTop />
     </div>
   );

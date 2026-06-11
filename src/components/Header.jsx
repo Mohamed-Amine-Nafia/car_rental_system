@@ -1,6 +1,6 @@
 import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
-function Header({ onDarkMode, isDarkMode }) {
+function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
   return (
@@ -21,7 +21,8 @@ function Header({ onDarkMode, isDarkMode }) {
           <div className=" flex items-center flex-row-reverse  text-xs lg:text-sm  gap-3 ">
             <div className="flex items-center gap-2 lg:gap-3">
               <span
-                className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"}`}
+                onClick={() => onLanguageChange("fr")}
+                className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"} cursor-pointer`}
               >
                 <img
                   className="w-5"
@@ -31,7 +32,8 @@ function Header({ onDarkMode, isDarkMode }) {
                 Fr
               </span>
               <span
-                className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"}`}
+                onClick={() => onLanguageChange("ar")}
+                className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"} cursor-pointer`}
               >
                 <img
                   className="w-5"
@@ -97,32 +99,41 @@ function Header({ onDarkMode, isDarkMode }) {
         />
       </div>
       <div className="hidden md:flex justify-center items-center flex-2 whitespace-nowrap">
-        <ul className="flex justify-center gap-5 lg:gap-8  lg:text-sm text-xs ">
+        <ul
+          className={`flex justify-center gap-5 lg:gap-8  lg:text-sm text-xs ${language === "fr" ? "flex-row" : "flex-row-reverse"}`}
+        >
           <li
-            className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
+            className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase `}
           >
-            <a href="#cars-section">Notre Flotte</a>
+            <a href="#cars-section">
+              {language === "fr" ? "Notre Flotte" : "سياراتنا"}
+            </a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
-            <a href="#rental-steps">Etapes</a>
+            <a href="#rental-steps">
+              {language === "fr" ? "Etapes" : "الخطوات"}
+            </a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
-            <a href="#faqs">Faq</a>
+            <a href="#faqs">{language === "fr" ? "Faqs" : "الأسئلة الشائعة"}</a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
-            <a href="#footer">Contact</a>
+            <a href="#footer">
+              {language === "fr" ? "Contactez Nous" : "تواصل معنا"}
+            </a>
           </li>
         </ul>
       </div>
       <div className="hidden md:flex  flex-1 text-xs lg:text-sm justify-end gap-3 ">
-        <div className="flex items-center gap-2 lg:gap-3">
+        <div className="flex items-center gap-2 lg:gap-3 cursor-pointer">
           <span
+            onClick={() => onLanguageChange("fr")}
             className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
             <img
@@ -133,6 +144,7 @@ function Header({ onDarkMode, isDarkMode }) {
             Fr
           </span>
           <span
+            onClick={() => onLanguageChange("ar")}
             className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
             <img
