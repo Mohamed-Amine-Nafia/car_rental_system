@@ -24,7 +24,7 @@ function ScrollTop() {
       className={`fixed bottom-5 right-10 z-50  gap-2  flex flex-col items-center   md:text-sm text-xs cursor-pointer`}
     >
       <a
-        href="https://wa.me/212664271595"
+        href="https://wa.me/212600000000"
         target="_blank"
         className="w-fit h-fit flex items-center justify-center "
       >

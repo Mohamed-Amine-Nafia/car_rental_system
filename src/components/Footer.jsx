@@ -1,22 +1,24 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
-function Footer({ isDarkMode }) {
+function Footer({ isDarkMode, language }) {
   return (
     <div id="footer" className="p-5 flex flex-col  w-full">
       <h3
         className={`text-xl w-fit md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
       >
-        CONTACTEZ NOUS
+        {language === "en" ? "CONTACT US" : "تواصل معنا"}
       </h3>
       <div
         className={`flex flex-col mt-6 md:flex-row md:justify-between md:items-center border-2 gap-4  p-5  rounded-xl ${isDarkMode ? "bg-gray-900 border-gray-800 " : "bg-secondary "}`}
       >
         <div className="w-full md:w-1/2">
           <div className="text-ternary text-sm md:text-base">
-            <h4 className="inline-flex items-center font-nevera">OUZLAF</h4>
+            <h4 className="inline-flex items-center font-nevera">RENTX</h4>
           </div>
           <div className="text-ternary mt-5 text-sm">
-            <span className="text-ternary inline-flex ">Contactez nous:</span>
+            <span className="text-ternary inline-flex ">
+              {language === "en" ? "Contact us:" : "تواصل معنا:"}
+            </span>
             <br />
             <span className="inline-flex items-center gap-1.5 mt-3 text-xs">
               <Mail size={17} />
@@ -25,12 +27,14 @@ function Footer({ isDarkMode }) {
             <br />
             <span className="inline-flex items-center gap-1.5 mt-1.5 text-xs">
               <Phone size={17} />
-              +212664271595
+              +212600000000
             </span>
             <br />
             <span className="inline-flex items-center gap-1.5 mt-1.5 text-xs">
               <Clock size={17} />
-              Ouvert : 7j/7j
+              {language === "en"
+                ? "Open: 7 days/week"
+                : "مفتوح: 7 أيام/الأسبوع"}
               <span className="text-text-ternary">24h/24h</span>
             </span>
             <br />
@@ -45,7 +49,11 @@ function Footer({ isDarkMode }) {
           >
             <span className="text-sm">&copy;</span>
             <span>{new Date().getFullYear()}</span>
-            <span>OUZLAF DRIVE Tous droits réservés</span>
+            <span>
+              {language === "en"
+                ? "RENTX All rights reserved"
+                : "RENTX جميع الحقوق محفوظة"}
+            </span>
           </div>
         </div>
         <div className="w-full md:w-1/2">

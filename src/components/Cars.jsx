@@ -1,4 +1,4 @@
-import { Check, Cog, Fuel, X } from "lucide-react";
+﻿import { Check, Cog, Fuel, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function Cars({ isDarkMode, language }) {
@@ -86,11 +86,11 @@ function Cars({ isDarkMode, language }) {
       }
 
       if (!response.ok || !data.success) {
-        setErrorMessage(data.message || "Erreur serveur");
+        setErrorMessage(data.message || "Server error");
         return;
       }
       if (response.ok && data.success) {
-        await handleCarStatus(reservedCar.car_id, "reservé");
+        await handleCarStatus(reservedCar.car_id, "reserved");
 
         setSuccessMessage(data.message);
 
@@ -137,7 +137,6 @@ function Cars({ isDarkMode, language }) {
 
         if (data.status === "success") {
           setContractFilePath(data.file_path); // Save file path path from database response
-          setShowContract(true); // Reveal the modal layout window
         } else {
           console.error("Error generating contract:", data.message);
         }
@@ -219,12 +218,12 @@ function Cars({ isDarkMode, language }) {
         <h2
           className={`text-xl md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
         >
-          {language === "fr" ? "NOTRE FLOTTE" : "أسطولنا"}
+          {language === "en" ? "OUR FLEET" : "أسطولنا"}
         </h2>
         <span
           className={`text-xs md:text-sm whitespace-nowrap ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
         >
-          {language === "fr" ? "Les voitures disponibles" : "السيارات المتوفرة"}
+          {language === "en" ? "Available cars" : "السيارات المتوفرة"}
         </span>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-10">
@@ -277,12 +276,12 @@ function Cars({ isDarkMode, language }) {
                   <span
                     className={`text-lg ${isDarkMode ? "text-primary" : "text-secondary"}`}
                   >
-                    {car.price} {language === "fr" ? "MAD" : "درهم"}
+                    {car.price} {language === "en" ? "MAD" : "درهم"}
                   </span>
                   <span
                     className={` ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
                   >
-                    {language === "fr" ? "/Jour" : "/اليوم"}
+                    {language === "en" ? "/Day" : "/اليوم"}
                   </span>
                 </div>
                 <div className="flex  flex-col text-xs">
@@ -306,7 +305,7 @@ function Cars({ isDarkMode, language }) {
                   }}
                   className={`absolute top-1/2 -translate-y-1/2 right-3  py-1.5 px-4 rounded-full text-sm  hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer ${isDarkMode ? "bg-ternary text-secondary" : "bg-secondary text-ternary"}`}
                 >
-                  {language === "fr" ? "Résérver" : "قم بالحجز"}
+                  {language === "en" ? "Reserve" : "قم بالحجز"}
                 </button>
               </div>
             </div>
@@ -364,26 +363,25 @@ function Cars({ isDarkMode, language }) {
               <span
                 className={`mt-2.5  border-t-2 pt-3 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
               >
-                {rentalDays || 0} jours x {reservedCar.price}
-                {language === "fr" ? "MAD" : "درهم"}
+                {rentalDays || 0} days x {reservedCar.price}
+                {language === "en" ? "MAD" : "درهم"}
               </span>
               <span className="text-3xl mt-2">
-                Total : {rentalDays * reservedCar.price || 0}
-                {language === "fr" ? "MAD" : "درهم"}
+                Total: {rentalDays * reservedCar.price || 0}
+                {language === "en" ? "MAD" : "درهم"}
               </span>
             </div>
           </div>
           <div className="p-5 ">
             <div>
               <h3 className="text-2xl">
-                {language === "fr"
-                  ? "Résérver ce véhicule"
-                  : "قم بحجز هاته السيارة"}
+                {language === "en"
+                  ? "Reserve this vehicle"
+                  : "قم بحجز  هذه السيارة"}
               </h3>
               <p className="text-xs mt-2 leading-5">
-                {language === "fr"
-                  ? `  Remplissez le formulaire - l'agence vous confirmera votre
-                réservation`
+                {language === "en"
+                  ? `Fill out the form - the agency will confirm your booking`
                   : `املأ نموذج الحجز، وستتواصل معك الوكالة لتأكيد حجزك.`}
               </p>
             </div>
@@ -394,7 +392,7 @@ function Cars({ isDarkMode, language }) {
               className="mt-8 text-sm"
             >
               <label htmlFor="start-date">
-                {language === "fr" ? "PRISE EN CHARGE" : "بداية الحجز"}
+                {language === "en" ? "PICKUP" : "بداية الحجز"}
               </label>
 
               <input
@@ -406,7 +404,7 @@ function Cars({ isDarkMode, language }) {
                 required
               />
               <label htmlFor="end-date">
-                {language === "fr" ? "RESTITUTION" : "نهاية الحجز"}
+                {language === "en" ? "RETURN" : "نهاية الحجز"}
               </label>
               <input
                 onChange={handleChange}
@@ -418,7 +416,7 @@ function Cars({ isDarkMode, language }) {
               />
               <br />
               <label htmlFor="client-name">
-                {language === "fr" ? "Nom complet" : "الاسم الكامل"}
+                {language === "en" ? "Full name" : "الاسم الكامل"}
               </label>
               <input
                 onChange={handleChange}
@@ -430,7 +428,7 @@ function Cars({ isDarkMode, language }) {
                 required
               />
               <label htmlFor="phone">
-                {language === "fr" ? "Téléphone" : "الهاتف"}
+                {language === "en" ? "Phone" : "الهاتف"}
               </label>
               <input
                 onChange={handleChange}
@@ -442,8 +440,8 @@ function Cars({ isDarkMode, language }) {
                 required
               />
               <label htmlFor="license">
-                {language === "fr"
-                  ? "N° permis de conduire"
+                {language === "en"
+                  ? "Driver license number"
                   : "رقم رخصة السياقة"}{" "}
               </label>
               <input
@@ -457,17 +455,14 @@ function Cars({ isDarkMode, language }) {
               <input
                 className={`w-full  py-2 px-2.5 my-2.5 rounded-md hover:bg-accent hover:text-secondary duration-300 ease-linear cursor-pointer ${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"}`}
                 type="submit"
-                value={
-                  language === "fr" ? "Confirmer la résérvation" : "تأكيد الحجز"
-                }
+                value={language === "en" ? "Confirm booking" : "تأكيد الحجز"}
               />
             </form>
             <p
               className={`text-sm  mt-2.5 ${isDarkMode ? "text-text-ternary " : "text-text-secondary"}`}
             >
-              {language === "fr"
-                ? `    En envoyant, vous acceptez d'étre contacté par l'agence pour
-              confirmer cette résérvation`
+              {language === "en"
+                ? `By submitting, you agree to be contacted by the agency to confirm this booking`
                 : `بإرسال هذا الطلب، فإنك توافق على أن تتواصل معك الوكالة لتأكيد هذا الحجز.`}
             </p>
           </div>
@@ -500,10 +495,11 @@ function Cars({ isDarkMode, language }) {
                   setSuccessMessage("");
                   setErrorMessage("");
                   setIsFormShown(false);
+                  setShowContract(true);
                 }}
                 className={`${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"} py-1.5 px-5 rounded-full cursor-pointer hover:bg-accent hover:text-secondary duration-200 ease-linear`}
               >
-                {language === "fr" ? "D'accord" : "حسنا"}
+                {language === "en" ? "OK" : "حسنا"}
               </button>
             </div>
           )}
@@ -516,7 +512,7 @@ function Cars({ isDarkMode, language }) {
           <div className="bg-white text-black w-11/12 max-w-4xl h-[85vh] rounded-xl p-4 flex flex-col shadow-2xl">
             <div className="flex justify-between items-center mb-3 pb-2 border-b">
               <h3 className="text-lg font-semibold text-gray-800">
-                {language === "fr" ? "Aperçu du Contrat" : "إظهار العقد"}
+                {language === "en" ? "Contract Preview" : "إظهار عقد الكراء"}
               </h3>
               <button
                 onClick={() => {
@@ -536,7 +532,7 @@ function Cars({ isDarkMode, language }) {
                 width="100%"
                 height="100%"
                 className="border-0"
-                title="Contrat PDF"
+                title="Contract PDF"
               />
             </div>
 
@@ -548,7 +544,7 @@ function Cars({ isDarkMode, language }) {
                 }}
                 className="px-5 py-2 bg-gray-900 text-white font-medium text-sm rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
               >
-                {language === "fr" ? "  Fermer" : "غلق"}
+                {language === "en" ? "Close" : "إغلاق"}
               </button>
             </div>
           </div>

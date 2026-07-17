@@ -98,7 +98,7 @@ const cardData = [
       "Excellent rental service, professional and friendly team. I'm very satisfied with my experience. Best of luck! 😊",
   },
 ];
-export default function Carousel({ isDarkMode }) {
+export default function Carousel({ isDarkMode, language }) {
   const [activeIndex, setActiveIndex] = useState(
     Math.floor(cardData.length / 2),
   );
@@ -138,11 +138,13 @@ export default function Carousel({ isDarkMode }) {
     }
   };
   return (
-    <section className="w-full  p-5 flex-col items-center justify-center font-Poppins overflow-hidden">
+    <section
+      className={`w-full p-5 flex-col items-center justify-center overflow-hidden ${language === "ar" ? "font-Cairo" : "font-Poppins"}`}
+    >
       <h3
-        className={`text-xl md:text-2xl w-fit font-medium border-b-2 uppercase  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
+        className={`text-xl md:text-2xl w-fit font-medium border-b-2 uppercase whitespace-nowrap ${language === "ar" ? "font-Cairo" : "font-Poppins"} ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
       >
-        Témoignages de nos clients
+        {language === "en" ? "Customer Testimonials" : "آراء عملائنا"}
       </h3>
       <div
         className="w-full mx-auto mt-6 "
@@ -155,7 +157,7 @@ export default function Carousel({ isDarkMode }) {
           <a
             href="https://www.google.com/maps/place/St%C3%A9+OUZLAF+DRIVE/@27.1303634,-13.201556,308m/data=!3m1!1e3!4m17!1m8!3m7!1s0xc3772c616b079c9:0x9bea0d2b555fce5f!2sLaayoune!3b1!8m2!3d27.1500384!4d-13.1990758!16s%2Fg%2F11b6rc7tms!3m7!1s0xc37738ba690eaff:0x15d364ef7c9a343d!8m2!3d27.1303862!4d-13.1985005!9m1!1b1!16s%2Fg%2F11ynzh_73j?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
-            className={`inline-flex items-center gap-2  w-fit  py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-200 ease-linear ${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"}`}
+            className={`inline-flex items-center gap-2 w-fit py-2 px-4 rounded-lg hover:bg-accent hover:text-secondary duration-200 ease-linear ${language === "ar" ? "font-Cairo" : "font-Poppins"} ${isDarkMode ? "bg-primary text-secondary" : "bg-secondary text-ternary"}`}
           >
             Google Reviews
             <ExternalLink size={18} />
@@ -180,6 +182,7 @@ export default function Carousel({ isDarkMode }) {
                   activeIndex={activeIndex}
                   totalCards={cardData.length}
                   isDarkMode={isDarkMode}
+                  language={language}
                 />
               ))}
             </motion.div>
@@ -216,7 +219,7 @@ export default function Carousel({ isDarkMode }) {
     </section>
   );
 }
-function Card({ card, index, activeIndex, totalCards, isDarkMode }) {
+function Card({ card, index, activeIndex, totalCards, isDarkMode, language }) {
   let offset = index - activeIndex;
   if (offset > totalCards / 2) {
     offset -= totalCards;
@@ -245,7 +248,7 @@ function Card({ card, index, activeIndex, totalCards, isDarkMode }) {
       initial={false}
     >
       <div
-        className={`relative w-full md:w-2/3  flex flex-col items-center border justify-center h-full  md:h-4/5 rounded-lg shadow-sm overflow-hidden ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
+        className={`relative w-full md:w-2/3 flex flex-col items-center border justify-center h-full md:h-4/5 rounded-lg shadow-sm overflow-hidden ${language === "ar" ? "font-Cairo" : "font-Poppins"} ${isDarkMode ? "bg-gray-900 border-gray-800" : "bg-ternary-fade border-ternary"}`}
       >
         <img
           src={card.imageUrl}
@@ -260,12 +263,12 @@ function Card({ card, index, activeIndex, totalCards, isDarkMode }) {
         />
         <div className="text-center mt-4">
           <h4
-            className={` text-xs md:text-sm font-semibold ${isDarkMode ? "text-ternary" : "text-secondary"}`}
+            className={`text-xs md:text-sm font-semibold ${language === "ar" ? "font-Cairo" : "font-Poppins"} ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
             {card.user}
           </h4>
           <p
-            className={`text-xs w-full mt-2 px-8 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
+            className={`text-xs w-full mt-2 px-8 ${language === "ar" ? "font-Cairo" : "font-Poppins"} ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
             {card.review}
           </p>

@@ -1,5 +1,6 @@
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
+
 function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
@@ -9,9 +10,9 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
     >
       <div className="flex-1 ">
         <img
-          src="../../src/assets/images/logo.png"
+          src="../../src/assets/images/logo.svg"
           alt="logo"
-          className={`lg:w-36 w-22 md:w-26 ${isDarkMode ? "invert-100" : "invert-0"}`}
+          className={`lg:w-36 w-22 md:w-26 p-2`}
         />
       </div>
       <div
@@ -21,15 +22,15 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
           <div className=" flex items-center flex-row-reverse  text-xs lg:text-sm  gap-3 ">
             <div className="flex items-center gap-2 lg:gap-3">
               <span
-                onClick={() => onLanguageChange("fr")}
+                onClick={() => onLanguageChange("en")}
                 className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"} cursor-pointer`}
               >
                 <img
                   className="w-5"
-                  src="../../src/assets/images/france.png"
-                  alt="france flag"
+                  src="../../src/assets/images/english.png"
+                  alt="english language"
                 />
-                Fr
+                En
               </span>
               <span
                 onClick={() => onLanguageChange("ar")}
@@ -40,7 +41,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
                   src="../../src/assets/images/morocco.png"
                   alt="morocco flag"
                 />
-                ع
+                Ar
               </span>
             </div>
             <div
@@ -65,22 +66,26 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
           <li
             className={`py-2.5 px-3 rounded-full text-center hover:text-accent duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"} uppercase`}
           >
-            <a href="#cars-section">Notre Flotte</a>
+            <a href="#cars-section">
+              {language === "en" ? "Our Fleet" : "سياراتنا"}
+            </a>
           </li>
           <li
             className={`py-2.5 px-3 rounded-full text-center hover:text-accent duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"} uppercase`}
           >
-            <a href="#rental-steps">Etapes</a>
+            <a href="#rental-steps">
+              {language === "en" ? "Steps" : "الخطوات"}
+            </a>
           </li>
           <li
             className={`py-2.5 px-3 rounded-full text-center hover:text-accent duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"} uppercase`}
           >
-            <a href="#faqs">Faq</a>
+            <a href="#faqs">{language === "en" ? "Faq" : "الأسئلة الشائعة"}</a>
           </li>
           <li
             className={`py-2.5 px-3 rounded-full text-center hover:text-accent  duration-200 ease-linear ${isDarkMode ? "text-ternary" : "text-secondary"} uppercase`}
           >
-            <a href="#footer">Contact</a>
+            <a href="#footer">{language === "en" ? "Contact" : "تواصل معنا"}</a>
           </li>
         </ul>
         <div
@@ -88,7 +93,9 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
         >
           <span>&copy;</span>
           <span>{new Date().getFullYear()}</span>
-          <span>Tous les droits résérvés</span>
+          <span>
+            {language === "en" ? "All rights reserved" : "جميع الحقوق محفوظة"}
+          </span>
         </div>
       </div>
       <div>
@@ -100,32 +107,32 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
       </div>
       <div className="hidden md:flex justify-center items-center flex-2 whitespace-nowrap">
         <ul
-          className={`flex justify-center gap-5 lg:gap-8  lg:text-sm text-xs ${language === "fr" ? "flex-row" : "flex-row-reverse"}`}
+          className={`flex justify-center gap-5 lg:gap-8  lg:text-sm text-xs ${language === "en" ? "flex-row" : "flex-row-reverse"}`}
         >
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase `}
           >
             <a href="#cars-section">
-              {language === "fr" ? "Notre Flotte" : "سياراتنا"}
+              {language === "en" ? "Our Fleet" : "أسطولنا"}
             </a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
             <a href="#rental-steps">
-              {language === "fr" ? "Etapes" : "الخطوات"}
+              {language === "en" ? "Steps" : "الخطوات"}
             </a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
-            <a href="#faqs">{language === "fr" ? "Faqs" : "الأسئلة الشائعة"}</a>
+            <a href="#faqs">{language === "en" ? "Faqs" : "الأسئلة الشائعة"}</a>
           </li>
           <li
             className={` ${isDarkMode ? "text-ternary" : "text-secondary"} text-center  hover:text-accent duration-200 ease-linear uppercase`}
           >
             <a href="#footer">
-              {language === "fr" ? "Contactez Nous" : "تواصل معنا"}
+              {language === "en" ? "Contact Us" : "تواصل معنا"}
             </a>
           </li>
         </ul>
@@ -133,15 +140,15 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
       <div className="hidden md:flex  flex-1 text-xs lg:text-sm justify-end gap-3 ">
         <div className="flex items-center gap-2 lg:gap-3 cursor-pointer">
           <span
-            onClick={() => onLanguageChange("fr")}
+            onClick={() => onLanguageChange("en")}
             className={`inline-flex items-center gap-1 ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
             <img
-              className="w-5"
-              src="../../src/assets/images/france.png"
-              alt="france flag"
+              className="w-4"
+              src="../../src/assets/images/english.png"
+              alt="english language"
             />
-            Fr
+            En
           </span>
           <span
             onClick={() => onLanguageChange("ar")}
@@ -152,7 +159,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
               src="../../src/assets/images/morocco.png"
               alt="morocco flag"
             />
-            ع
+            Ar
           </span>
         </div>
         <div

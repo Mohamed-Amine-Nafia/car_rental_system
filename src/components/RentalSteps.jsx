@@ -1,16 +1,16 @@
-function RentalSteps({ isDarkMode }) {
+function RentalSteps({ isDarkMode, language }) {
   return (
     <div id="rental-steps" className="p-5">
       <div className="flex gap-1.5 items-center">
         <h2
           className={`text-xl md:text-2xl font-medium border-b-2  whitespace-nowrap ${isDarkMode ? "text-ternary border-ternary" : "text-secondary border-secondary"}`}
         >
-          LES ETAPES
+          {language === "en" ? "STEPS" : "الخطوات"}
         </h2>
         <span
           className={`text-xs md:text-sm whitespace-nowrap ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
         >
-          (Comment ça marche)
+          {language === "en" ? "(How it works)" : "(كيف تعمل الخدمة)"}
         </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-4">
@@ -20,13 +20,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            1. Choisissez votre véhicule
+            {language === "en" ? "1. Choose your vehicle" : "1. اختر سيارتك"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Parcourez notre flotte et sélectionnez le véhicule qui vous
-            convient.
+            {language === "en"
+              ? "Browse our fleet and select the vehicle that suits you."
+              : "تصفح أسطولنا واختر السيارة التي تناسبك."}
           </p>
         </div>
         <div
@@ -35,12 +36,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            2. Sélectionnez vos dates
+            {language === "en" ? "2. Select your dates" : "2. اختر التواريخ"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Indiquez les dates de prise en charge et de retour souhaitées.
+            {language === "en"
+              ? "Enter your preferred pickup and return dates."
+              : "حدد تواريخ الاستلام والإرجاع التي تناسبك."}
           </p>
         </div>
         <div
@@ -49,12 +52,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            3. Effectuez une pré-réservation
+            {language === "en" ? "3. Send a booking request" : "3. أرسل طلب الحجز"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Remplissez vos coordonnées et envoyez votre demande.
+            {language === "en"
+              ? "Fill in your details and send your request."
+              : "املأ معلوماتك وأرسل طلبك."}
           </p>
         </div>
         <div
@@ -63,13 +68,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            4. Confirmation de la demande
+            {language === "en" ? "4. Request confirmation" : "4. تأكيد الطلب"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Notre équipe vous contacte pour confirmer la disponibilité du
-            véhicule.
+            {language === "en"
+              ? "Our team will contact you to confirm vehicle availability."
+              : "سيتواصل معك فريقنا لتأكيد توفر السيارة."}
           </p>
         </div>
         <div
@@ -78,13 +84,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            5. Rendez-vous à l'agence
+            {language === "en" ? "5. Visit the agency" : "5. توجه إلى الوكالة"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Présentez les documents nécessaires et finalisez le contrat de
-            location.
+            {language === "en"
+              ? "Bring the required documents and finalize the rental contract."
+              : "أحضر الوثائق المطلوبة وأكمل عقد الكراء."}
           </p>
         </div>
         <div
@@ -93,12 +100,14 @@ function RentalSteps({ isDarkMode }) {
           <h4
             className={` md:text-lg ${isDarkMode ? "text-ternary" : "text-secondary"}`}
           >
-            6. Récupérez votre véhicule
+            {language === "en" ? "6. Pick up your vehicle" : "6. استلم سيارتك"}
           </h4>
           <p
             className={`text-xs md:text-sm mt-2 ${isDarkMode ? "text-text-ternary" : "text-text-secondary"}`}
           >
-            Prenez votre voiture et profitez de votre trajet.
+            {language === "en"
+              ? "Take your car and enjoy your trip."
+              : "استلم سيارتك واستمتع برحلتك."}
           </p>
         </div>
       </div>
