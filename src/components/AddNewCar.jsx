@@ -2,7 +2,7 @@ import { Check, LogIn, X } from "lucide-react";
 
 import { useState } from "react";
 
-function AddNewCar({ onClick, showform, onRefresh }) {
+function AddNewCar({ onClick, showform, onRefresh, language, translations }) {
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     brand: "",
@@ -46,9 +46,14 @@ function AddNewCar({ onClick, showform, onRefresh }) {
       const result = await response.json();
 
       if (!result.success) {
-        setMessage("Une erreur est survenue lors de l'ajout de la voiture.");
+        setMessage(
+          translations?.errorAddCar ||
+            "An error occurred while adding the car.",
+        );
       }
-      setMessage("La voiture a été ajoutée avec réussite");
+      setMessage(
+        translations?.successAddCar || "The car was added successfully",
+      );
     } catch (error) {
       console.error(error);
       console.log("Something went wrong");
@@ -76,37 +81,37 @@ function AddNewCar({ onClick, showform, onRefresh }) {
         <X />
       </span>
       <form onSubmit={handleSubmit} className="text-xs w-full">
-        <label htmlFor="brand">Marque:</label>
+        <label htmlFor="brand">{translations?.brand || "Brand"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="text"
           id="brand"
           name="brand"
-          placeholder="Marque"
+          placeholder={translations?.brand || "Brand"}
           onChange={handleChange}
           value={formData.brand}
         />
-        <label htmlFor="model">Modele:</label>
+        <label htmlFor="model">{translations?.model || "Model"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="text"
           id="model"
           name="model"
-          placeholder="Modele"
+          placeholder={translations?.model || "Model"}
           onChange={handleChange}
           value={formData.model}
         />
-        <label htmlFor="year">Anneé:</label>
+        <label htmlFor="year">{translations?.year || "Year"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="text"
           id="year"
           name="year"
-          placeholder="Anneé"
+          placeholder={translations?.year || "Year"}
           onChange={handleChange}
           value={formData.year}
         />
-        <label htmlFor="plate">Matricule:</label>
+        <label htmlFor="plate">{translations?.plate || "Plate"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="text"
@@ -116,17 +121,17 @@ function AddNewCar({ onClick, showform, onRefresh }) {
           onChange={handleChange}
           value={formData.plate}
         />
-        <label htmlFor="price">Prix par jour:</label>
+        <label htmlFor="price">{translations?.price || "Price per day"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="text"
           id="price"
           name="price"
-          placeholder="Prix"
+          placeholder={translations?.price || "Price"}
           onChange={handleChange}
           value={formData.price}
         />
-        <label htmlFor="image">Image:</label>
+        <label htmlFor="image">{translations?.image || "Image"}:</label>
         <input
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           type="file"
@@ -135,7 +140,7 @@ function AddNewCar({ onClick, showform, onRefresh }) {
           required
           onChange={(e) => setImage(e.target.files[0])}
         ></input>
-        <label htmlFor="status">Etat:</label>
+        <label htmlFor="status">{translations?.status || "Status"}:</label>
         <select
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           name="status"
@@ -143,12 +148,16 @@ function AddNewCar({ onClick, showform, onRefresh }) {
           onChange={handleChange}
           value={formData.status}
         >
-          <option value="">--choisir--</option>
-          <option value="disponible">Disponible</option>
-          <option value="reservé">Reservé</option>
-          <option value="repair">Repair</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="disponible">
+            {translations?.available || "Available"}
+          </option>
+          <option value="reservé">
+            {translations?.reserved || "Reserved"}
+          </option>
+          <option value="repair">{translations?.repair || "Repair"}</option>
         </select>
-        <label htmlFor="fuel">Carburant:</label>
+        <label htmlFor="fuel">{translations?.fuel || "Fuel"}:</label>
         <select
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           name="fuel"
@@ -156,11 +165,15 @@ function AddNewCar({ onClick, showform, onRefresh }) {
           onChange={handleChange}
           value={formData.fuel}
         >
-          <option value="">--choisir--</option>
-          <option value="essence">Essence</option>
-          <option value="gasoil">Gasoil</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="essence">
+            {translations?.gasoline || "Gasoline"}
+          </option>
+          <option value="gasoil">{translations?.diesel || "Diesel"}</option>
         </select>
-        <label htmlFor="transmission">Transmission:</label>
+        <label htmlFor="transmission">
+          {translations?.transmission || "Transmission"}:
+        </label>
         <select
           className="w-full bg-primary border-0 outline-0 p-2 rounded-sm my-2"
           name="transmission"
@@ -168,15 +181,17 @@ function AddNewCar({ onClick, showform, onRefresh }) {
           onChange={handleChange}
           value={formData.transmission}
         >
-          <option value="">--choisir--</option>
-          <option value="automatique">Automatique</option>
-          <option value="manuelle">Manuelle</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="automatique">
+            {translations?.automatic || "Automatic"}
+          </option>
+          <option value="manuelle">{translations?.manual || "Manual"}</option>
         </select>
 
         <input
           className="w-full py-2 inline-flex bg-secondary text-ternary mt-4 text-sm font-normal rounded-sm cursor-pointer hover:bg-accent hover:text-secondary transition duration-300 ease-linear"
           type="submit"
-          value="Ajouter"
+          value={translations?.add || "Add"}
         />
       </form>
       {message && (
@@ -194,7 +209,7 @@ function AddNewCar({ onClick, showform, onRefresh }) {
             }}
             className="bg-secondary text-ternary py-1.5 px-4 text-sm rounded-full cursor-pointer hover:bg-accent hover:text-secondary duration-200 ease-linear"
           >
-            D'accord!
+            {translations?.ok || "OK!"}
           </button>
         </div>
       )}

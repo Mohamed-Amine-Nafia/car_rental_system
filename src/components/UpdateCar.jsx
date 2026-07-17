@@ -1,7 +1,14 @@
 import { Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
+function UpdateCar({
+  onUpdate,
+  showUpdateForm,
+  car,
+  onRefresh,
+  language,
+  translations,
+}) {
   const [updateCar, setUpdateCar] = useState({});
   const [updateMessage, setUpdateMessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -46,11 +53,17 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
       const data = await res.json();
 
       if (!res.ok || data.status !== "success") {
-        throw new Error(data.message || "Update failed");
+        throw new Error(
+          data.message || translations?.updateCarFail || "Update failed",
+        );
       }
 
       setSuccess(true);
-      setUpdateMessage(data.message || "Voiture mise à jour avec succès");
+      setUpdateMessage(
+        data.message ||
+          translations?.updateCarSuccess ||
+          "Car updated successfully",
+      );
 
       // refresh parent list
       if (onRefresh) onRefresh(true);
@@ -74,7 +87,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
       </span>
 
       <form onSubmit={handleUpdateCar} className="text-xs w-full">
-        <label>Marque:</label>
+        <label>{translations?.brand || "Brand"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="brand"
@@ -82,7 +95,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
           onChange={handleChange}
         />
 
-        <label>Modele:</label>
+        <label>{translations?.model || "Model"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="model"
@@ -90,7 +103,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
           onChange={handleChange}
         />
 
-        <label>Anneé:</label>
+        <label>{translations?.year || "Year"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="year"
@@ -98,7 +111,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
           onChange={handleChange}
         />
 
-        <label>Matricule:</label>
+        <label>{translations?.plate || "Plate"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="plate"
@@ -106,7 +119,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
           onChange={handleChange}
         />
 
-        <label>Prix par jour:</label>
+        <label>{translations?.price || "Price per day"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="price"
@@ -115,7 +128,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
         />
 
         {/* KEEP IMAGE UI (NO LOGIC CHANGE) */}
-        <label>Image:</label>
+        <label>{translations?.image || "Image"}:</label>
         <input
           className="w-full bg-primary p-2 rounded-sm my-2"
           type="file"
@@ -123,47 +136,55 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
           accept="image/*"
         />
 
-        <label>Etat:</label>
+        <label>{translations?.status || "Status"}:</label>
         <select
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="status"
           value={updateCar.status || ""}
           onChange={handleChange}
         >
-          <option value="">--choisir--</option>
-          <option value="disponible">Disponible</option>
-          <option value="reservé">Reservé</option>
-          <option value="repair">Repair</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="available">
+            {translations?.available || "Available"}
+          </option>
+          <option value="reserved">
+            {translations?.reserved || "Reserved"}
+          </option>
+          <option value="repair">{translations?.repair || "Repair"}</option>
         </select>
 
-        <label>Carburant:</label>
+        <label>{translations?.fuel || "Fuel"}:</label>
         <select
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="fuel"
           value={updateCar.fuel || ""}
           onChange={handleChange}
         >
-          <option value="">--choisir--</option>
-          <option value="essence">Essence</option>
-          <option value="gasoil">Gasoil</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="essence">
+            {translations?.gasoline || "Gasoline"}
+          </option>
+          <option value="gasoil">{translations?.diesel || "Diesel"}</option>
         </select>
 
-        <label>Transmission:</label>
+        <label>{translations?.transmission || "Transmission"}:</label>
         <select
           className="w-full bg-primary p-2 rounded-sm my-2"
           name="transmission"
           value={updateCar.transmission || ""}
           onChange={handleChange}
         >
-          <option value="">--choisir--</option>
-          <option value="automatique">Automatique</option>
-          <option value="manuelle">Manuelle</option>
+          <option value="">{translations?.choose || "--choose--"}</option>
+          <option value="automatique">
+            {translations?.automatic || "Automatic"}
+          </option>
+          <option value="manuelle">{translations?.manual || "Manual"}</option>
         </select>
 
         <input
           className="w-full py-2 bg-secondary text-ternary mt-4 rounded-sm cursor-pointer"
           type="submit"
-          value="Mettre à jour"
+          value={translations?.update || "Update"}
         />
       </form>
 
@@ -186,7 +207,7 @@ function UpdateCar({ onUpdate, showUpdateForm, car, onRefresh }) {
             onClick={() => onUpdate(false)}
             className="text-xs inline-flex items-center bg-secondary text-ternary hover:bg-accent hover:text-secondary duration-200 ease-linear cursor-pointer py-1.5 px-3 rounded-full mt-2.5"
           >
-            D'accord
+            {translations?.ok || "OK"}
           </button>
         </div>
       )}

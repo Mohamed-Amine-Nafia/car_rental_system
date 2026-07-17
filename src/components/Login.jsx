@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "./AuthContext";
 import { Lock, LogInIcon, MailCheck, UserKey } from "lucide-react";
 
-export default function Login() {
+export default function Login({ language, translations }) {
   const { setUser } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -28,11 +28,15 @@ export default function Login() {
         }),
       });
 
+      if (!res.ok) {
+        throw new Error(
+          data.message || translations?.loginFailed || "Login failed",
+        );
+      }
+
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "Login failed");
-      }
+      console.log(data);
 
       // 🔥 THIS is the key integration
       setUser(data.user);
@@ -64,7 +68,7 @@ export default function Login() {
           <div className="relative">
             <input
               type="email"
-              placeholder="Email"
+              placeholder={translations?.email || "Email"}
               className="w-full py-2 px-7 rounded bg-slate-200"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +82,7 @@ export default function Login() {
           <div className="relative">
             <input
               type="password"
-              placeholder="Mot de passe"
+              placeholder={translations?.passwordPlaceholder || "Password"}
               className="w-full py-2 px-7 rounded bg-slate-200"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -90,7 +94,7 @@ export default function Login() {
           </div>
           <div className="text-xs text-slate-500">
             <p>Email demo: demo@agency.com</p>
-            <p>Mot de passe demo: 123456</p>
+            <p>{translations?.demoPassword || "Demo password"}: 123456</p>
           </div>
 
           <button
@@ -101,7 +105,7 @@ export default function Login() {
             {loading ? (
               <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-6 w-6 rounded-full bg-transparent border-2 border-ternary border-r-secondary animate-spin "></div>
             ) : (
-              "Connexion"
+              translations?.loginButton || "Login"
             )}
             <LogInIcon
               size={19}

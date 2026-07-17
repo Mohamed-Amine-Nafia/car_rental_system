@@ -13,9 +13,27 @@ import { useEffect, useState } from "react";
 import { Await } from "react-router-dom";
 import UpdateCar from "./UpdateCar";
 
-const filters = ["Tous", "Disponible", "Reservé", "Repair"];
-
-function Cars() {
+function Cars({ language, translations }) {
+  const filters = [
+    {
+      key: "all",
+      label: translations?.all || (language === "ar" ? "الكل" : "All"),
+    },
+    {
+      key: "available",
+      label:
+        translations?.available || (language === "ar" ? "متاح" : "Available"),
+    },
+    {
+      key: "reserved",
+      label:
+        translations?.reserved || (language === "ar" ? "محجوز" : "Reserved"),
+    },
+    {
+      key: "repair",
+      label: translations?.repair || (language === "ar" ? "إصلاح" : "Repair"),
+    },
+  ];
   const [isActive, setIsActive] = useState(0);
   const [showAddCar, setShowAddCar] = useState(false);
   const [showUpdateCar, setShowUpdateCar] = useState(false);
@@ -24,7 +42,7 @@ function Cars() {
   const [notification, setNotification] = useState("");
   const [searchedCar, setSearchCar] = useState("");
   const [cars, setCars] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("tous");
+  const [activeCategory, setActiveCategory] = useState("all");
   const [confirMessage, setConfirmMessage] = useState(false);
   const [carId, setCarId] = useState(null);
   const [isRefresh, setIsRefresh] = useState(false);
@@ -65,9 +83,21 @@ function Cars() {
     fetchCars();
   }, [isRefresh]);
 
+  function isStatusMatch(status, category) {
+    const normalizedStatus = String(status).toLowerCase();
+    const statusVariants = {
+      available: ["available", "disponible", "متاح"],
+      reserved: ["reserved", "محجوز"],
+      repair: ["repair", "إصلاح"],
+    };
+
+    return category === "all"
+      ? true
+      : statusVariants[category]?.includes(normalizedStatus) || false;
+  }
+
   const filterdCars = cars.filter((car) => {
-    const matchedStatus =
-      activeCategory === "tous" ? cars : car.status === activeCategory;
+    const matchedStatus = isStatusMatch(car.status, activeCategory);
     const matchedSearch = car.brand
       .toLowerCase()
       .includes(searchedCar.toLowerCase());
@@ -101,14 +131,14 @@ function Cars() {
   return (
     <div className="relative w-full h-full bg-primary  px-6 pt-3">
       <h2 className="text-2xl text-secondary font-semibold mt-4  border-b border-ternary pb-2.5">
-        FLOTTE
+        {language === "ar" ? "الأسطول" : "FLEET"}
       </h2>
       <div className="flex items-center gap-6 w-full  mt-6  border-b border-ternary pb-6">
         <div className="relative">
           <input
             value={searchedCar}
             type="text"
-            placeholder="Rechercher"
+            placeholder={translations?.search || "Search"}
             className="bg-ternary rounded-full text-xs pl-3 pr-16 outline-0 border-0 py-2"
             onChange={handleChange}
           />
@@ -118,14 +148,14 @@ function Cars() {
           {filters.map((item, index) => {
             return (
               <span
-                key={index}
+                key={item.key}
                 onClick={() => {
                   setIsActive(index);
-                  setActiveCategory(item.toLowerCase());
+                  setActiveCategory(item.key);
                 }}
                 className={`inline-block  px-5 py-2 rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer ${isActive === index ? "bg-accent text-ternary" : "bg-secondary text-ternary"}`}
               >
-                {item}
+                {item.label}
               </span>
             );
           })}
@@ -135,7 +165,7 @@ function Cars() {
             onClick={() => setShowAddCar(true)}
             className="inline-flex items-center gap-2 bg-accent text-ternary px-4 py-2 rounded-full font-medium cursor-pointer hover:bg-secondary hover:text-ternary transition duration-300 ease-linear"
           >
-            Ajouter une voiture
+            {translations?.addCar || "Add a car"}
             <Plus size={20} />
           </button>
         </div>
@@ -172,7 +202,7 @@ function Cars() {
                   </div>
                 </div>
                 <span
-                  className={`inline-flex capitalize    px-2 py-1.5 text-[10px] rounded-2xl ${car.status === "disponible" && "bg-emerald-100 text-emerald-600"} ${car.status === "reservé" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
+                  className={`inline-flex capitalize    px-2 py-1.5 text-[10px] rounded-2xl ${car.status === "available" && "bg-emerald-100 text-emerald-600"} ${car.status === "reserved" && "bg-violet-100 text-violet-600"} ${car.status === "repair" && "bg-orange-100 text-orange-600"}`}
                 >
                   {car.status}
                 </span>
@@ -204,7 +234,7 @@ function Cars() {
                       }}
                       className="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary text-ternary text-[10px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer "
                     >
-                      Supprimer
+                      {translations?.delete || "Delete"}
                     </button>
                     <button
                       onClick={() => {
@@ -213,7 +243,7 @@ function Cars() {
                       }}
                       className="inline-flex px-3 py-1.5 bg-secondary text-ternary text-[10px] rounded-full hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer whitespace-nowrap"
                     >
-                      Mettre à jour
+                      {translations?.update || "Update"}
                     </button>
                   </div>
                 </div>
@@ -226,6 +256,8 @@ function Cars() {
         showform={showAddCar}
         onClick={handleClick}
         onRefresh={handleRefresh}
+        language={language}
+        translations={translations}
       />
 
       {/* CAR REMOVING NOTIFICATION */}
@@ -242,7 +274,7 @@ function Cars() {
             onClick={() => setIsCarRemoved(false)}
             className="inline-flex text-xs w-fit mt-3 rounded-full  bg-secondary text-ternary py-2 px-5 hover:bg-accent hover:text-secondary transition duration-300 ease-linear cursor-pointer"
           >
-            D'accord!
+            {translations?.ok || "OK!"}
           </button>
         </div>
       )}
@@ -252,19 +284,22 @@ function Cars() {
           onUpdate={handleUpdate}
           car={carToUpdate}
           onRefresh={handleRefresh}
+          language={language}
+          translations={translations}
         />
       )}
       {confirMessage && (
         <div className="absolute border border-secondary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-primary py-8 px-8 rounded-md flex flex-col items-center gap-5">
           <p className="text-[12px]">
-            Êtes-vous sûr de vouloir supprimer cette voiture ?
+            {translations?.confirmDelete ||
+              "Are you sure you want to delete this car?"}
           </p>
           <div className="flex items-center gap-5">
             <button
               className="bg-accent py-1.5 px-4 text-xs rounded-full hover:bg-secondary text-ternary duration-200 ease-linear cursor-pointer"
               onClick={() => setConfirmMessage(false)}
             >
-              Annuler
+              {translations?.cancel || "Cancel"}
             </button>
             <button
               className="bg-secondary py-1.5 px-4 text-xs rounded-full hover:bg-accent text-ternary duration-200 ease-linear cursor-pointer"
@@ -274,7 +309,7 @@ function Cars() {
                 setIsRefresh(true);
               }}
             >
-              Supprimer
+              Delete
             </button>
           </div>
         </div>

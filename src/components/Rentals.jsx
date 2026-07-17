@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function Rentals() {
+function Rentals({ language, translations }) {
   const [rentals, setRentals] = useState([]);
   const [clients, setClients] = useState([]);
   const [cars, setCars] = useState([]);
@@ -156,67 +156,97 @@ function Rentals() {
     return { region, letter, number };
   }
 
+  const getStatusLabel = (status) => {
+    const statusMap = {
+      PENDING:
+        translations?.pendingStatus ||
+        (language === "ar" ? "قيد الانتظار" : "Pending"),
+      CANCELLED:
+        translations?.cancelledStatus ||
+        (language === "ar" ? "ملغاة" : "Cancelled"),
+      CONFIRMED:
+        translations?.confirmedStatus ||
+        (language === "ar" ? "مؤكدة" : "Confirmed"),
+      ACTIVE:
+        translations?.activeStatus || (language === "ar" ? "نشطة" : "Active"),
+      EXPIRED:
+        translations?.expiredStatus ||
+        (language === "ar" ? "منتهية" : "Expired"),
+    };
+    return statusMap[status] || status;
+  };
+
   return (
     <div className="relative h-screen w-full bg-primary  p-6">
       <h2 className="text-2xl text-secondary font-semibold mt-6  border-b border-ternary pb-2.5">
-        RESERVATIONS
+        {translations?.reservationsTitle ||
+          (language === "ar" ? "الحجوزات" : "RESERVATIONS")}
       </h2>
       <div className="mt-10">
         <div className={`grid grid-cols-11 text-xs w-full whitespace-nowrap`}>
           <span
             className={`text-left  bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tl-full rounded-bl-full`}
           >
-            N°
+            {translations?.no || "N°"}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            CLIENT:
+            {translations?.clientLabel ||
+              (language === "ar" ? "العميل" : "CLIENT")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            TELEPHONE:
+            {translations?.phoneLabel ||
+              (language === "ar" ? "الهاتف" : "PHONE")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            N° PERMIS
+            {translations?.licenseLabel ||
+              (language === "ar" ? "رقم الرخصة" : "LICENSE NO.")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            VEHICULE
+            {translations?.vehicleLabel ||
+              (language === "ar" ? "المركبة" : "VEHICLE")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            MATRICULE
+            {translations?.plateLabel ||
+              (language === "ar" ? "اللوحة" : "PLATE")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            DEBUT
+            {translations?.startLabel ||
+              (language === "ar" ? "البداية" : "START")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary`}
           >
-            FIN
+            {translations?.endLabel || (language === "ar" ? "النهاية" : "END")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary `}
           >
-            STATUS
+            {translations?.statusLabel ||
+              (language === "ar" ? "الحالة" : "STATUS")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary `}
           >
-            OPERATIONS
+            {translations?.operationsLabel ||
+              (language === "ar" ? "العمليات" : "OPERATIONS")}
           </span>
           <span
             className={`text-left bg-secondary text-ternary  py-2  px-5 border-l border-ternary rounded-tr-full rounded-br-full`}
           >
-            PRISE EN CHARGE
+            {translations?.pickupLabel ||
+              (language === "ar" ? "الاستلام" : "PICKUP")}
           </span>
         </div>
 
@@ -262,11 +292,7 @@ function Rentals() {
                 <span
                   className={`text-left   py-2 rounded-full h-fit   px-5 ${rental.status === "PENDING" && " text-orange-600"} ${rental.status === "CANCELLED" && " text-red-600"} ${rental.status === "CONFIRMED" && " text-emerald-600"} ${rental.status === "ACTIVE" && " text-violet-600"} ${rental.status === "EXPIRED" && "text-blue-600"}`}
                 >
-                  {rental.status === "PENDING" && "En attente"}
-                  {rental.status === "CANCELLED" && "Annulé"}
-                  {rental.status === "CONFIRMED" && "Confirmé"}
-                  {rental.status === "ACTIVE" && "Actif"}
-                  {rental.status === "EXPIRED" && "Expiré"}
+                  {getStatusLabel(rental.status)}
                 </span>
                 <div className="relative">
                   <select
@@ -282,10 +308,22 @@ function Rentals() {
                     id="status"
                     className={`appearance-none w-full border border-transparent rounded px-3 py-2 pr-8 outline-none disabled:cursor-not-allowed`}
                   >
-                    <option value="">Choisir</option>
-                    <option value="CANCELLED">Annulé</option>
-                    <option value="CONFIRMED">Confirmé</option>
-                    <option value="ACTIVE">Active</option>
+                    <option value="">
+                      {translations?.chooseStatus ||
+                        (language === "ar" ? "اختر" : "Choose")}
+                    </option>
+                    <option value="CANCELLED">
+                      {translations?.cancelledStatus ||
+                        (language === "ar" ? "ملغاة" : "Cancelled")}
+                    </option>
+                    <option value="CONFIRMED">
+                      {translations?.confirmedStatus ||
+                        (language === "ar" ? "مؤكدة" : "Confirmed")}
+                    </option>
+                    <option value="ACTIVE">
+                      {translations?.activeStatus ||
+                        (language === "ar" ? "نشطة" : "Active")}
+                    </option>
                   </select>
 
                   <ChevronDown
