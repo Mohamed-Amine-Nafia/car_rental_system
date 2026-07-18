@@ -1,6 +1,8 @@
 ﻿import { Check, Cog, Fuel, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { API_URL } from "../config/api";
+
 function Cars({ isDarkMode, language }) {
   const [cars, setCars] = useState([]);
   const [reservedCar, setReservedCar] = useState(null);
@@ -27,9 +29,7 @@ function Cars({ isDarkMode, language }) {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-available-cars.php",
-        );
+        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
         const data = await response.json();
 
         if (data.status !== "success") {
@@ -68,7 +68,7 @@ function Cars({ isDarkMode, language }) {
     };
 
     try {
-      const response = await fetch("http://localhost/car_rental/rentals.php", {
+      const response = await fetch(`${API_URL}/rentals.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,18 +120,15 @@ function Cars({ isDarkMode, language }) {
 
     const fetchContract = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/create-contract.php",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              rental_id: rentalId,
-            }),
+        const response = await fetch(`${API_URL}/create-contract.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            rental_id: rentalId,
+          }),
+        });
 
         const data = await response.json();
 
@@ -191,7 +188,7 @@ function Cars({ isDarkMode, language }) {
 
   const handleCarStatus = async (id, newStatus) => {
     try {
-      const res = await fetch("http://localhost/car_rental/reserved-car.php", {
+      const res = await fetch(`${API_URL}/reserved-car.php`, {
         method: "PATCH",
         credentials: "include",
         headers: {
@@ -236,7 +233,7 @@ function Cars({ isDarkMode, language }) {
             >
               <img
                 className="absolute w-4/6 md:w-4/6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 duration-300 ease-linear"
-                src={`http://localhost/car_rental/uploads/cars/${car.image}`}
+                src={`${API_URL}/uploads/cars/${car.image}`}
                 alt="car"
               />
               <div className="p-3 flex items-center gap-4">
@@ -332,7 +329,7 @@ function Cars({ isDarkMode, language }) {
             <div className="h-1/2">
               <img
                 className="w-4/5  mx-auto"
-                src={`http://localhost/car_rental/uploads/cars/${reservedCar.image}`}
+                src={`${API_URL}/uploads/cars/${reservedCar.image}`}
                 alt="car"
               />
               <h3
@@ -528,7 +525,7 @@ function Cars({ isDarkMode, language }) {
             {/* Embedded Native Browser PDF View */}
             <div className="flex-1 w-full bg-gray-100 rounded overflow-hidden">
               <iframe
-                src={`http://localhost/car_rental/${contractFilePath}`}
+                src={`${API_URL}/${contractFilePath}`}
                 width="100%"
                 height="100%"
                 className="border-0"
