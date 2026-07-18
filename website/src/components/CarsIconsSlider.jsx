@@ -40,6 +40,7 @@ const carsIcons = [
     carImage: "nissan",
   },
 ];
+import image from `../../src/assets/images/cars_icons/${car.carImage}.png`
 function CarsIconSlider() {
   return (
     <div className="flex relative h-10 w-full overflow-hidden ">
@@ -54,7 +55,7 @@ function CarsIconSlider() {
           >
             <img
               className="w-8  lg:w-11 h-full aspect-square"
-              src={`../../src/assets/images/cars_icons/${car.carImage}.png`}
+              src={logo}
               alt="car"
             />
           </div>
