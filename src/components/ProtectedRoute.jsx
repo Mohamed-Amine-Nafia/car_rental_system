@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API_URL } from "../config/api";
 
 export default function ProtectedRoute() {
   const [auth, setAuth] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost/car_rental/me.php", {
+    fetch(`${API_URL}/me.php`, {
       credentials: "include",
     })
       .then((res) => res.json())

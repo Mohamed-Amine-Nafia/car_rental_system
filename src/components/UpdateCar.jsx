@@ -1,6 +1,8 @@
 import { Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { API_URL } from "../config/api";
+
 function UpdateCar({
   onUpdate,
   showUpdateForm,
@@ -42,7 +44,7 @@ function UpdateCar({
         car_id: car.car_id, // IMPORTANT FIX
       };
 
-      const res = await fetch("http://localhost/car_rental/update-car.php", {
+      const res = await fetch(`${API_URL}/update-car.php`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

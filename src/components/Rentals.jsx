@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
+import { API_URL } from "../config/api";
 
 function Rentals({ language, translations }) {
   const [rentals, setRentals] = useState([]);
@@ -10,13 +11,10 @@ function Rentals({ language, translations }) {
   useEffect(() => {
     const fetchRentals = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-rentals.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-rentals.php`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error(`rentals failed to fetch ${response.status}`);
@@ -38,13 +36,10 @@ function Rentals({ language, translations }) {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-clients.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-clients.php`, {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           const errorText = response.text();
           throw new Error(`Error: ${errorText}`);
@@ -64,13 +59,10 @@ function Rentals({ language, translations }) {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-cars.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-cars.php`, {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           const errorText = response.text();
           throw new Error(`Error: ${errorText}`);
@@ -119,20 +111,17 @@ function Rentals({ language, translations }) {
       ),
     );
     try {
-      const response = await fetch(
-        "http://localhost/car_rental/update-rentals.php",
-        {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            id: id,
-            status: newStatus,
-          }),
+      const response = await fetch(`${API_URL}/update-rentals.php`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          id: id,
+          status: newStatus,
+        }),
+      });
       if (!response.ok) {
         const errorText = response.text();
         throw new Error(`Error: ${errorText}`);

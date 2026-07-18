@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { API_URL } from "../config/api";
+
 function Dashboard({ language, translations }) {
   const [cars, setCars] = useState(null);
   const [bookings, setBookings] = useState(null);
@@ -23,7 +25,7 @@ function Dashboard({ language, translations }) {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const res = await fetch("http://localhost/car_rental/fetch-cars.php");
+        const res = await fetch(`${API_URL}/fetch-cars.php`);
         const data = await res.json();
 
         if (data.status !== "success") {
@@ -42,13 +44,10 @@ function Dashboard({ language, translations }) {
   useEffect(() => {
     const fetchRentals = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-rentals.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-rentals.php`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error(`rentals failed to fetch ${response.status}`);
@@ -69,9 +68,7 @@ function Dashboard({ language, translations }) {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch(
-          "http://localhost/car_rental/dashboard-kpis.php",
-        );
+        const res = await fetch(`${API_URL}/dashboard-kpis.php`);
 
         if (!res.ok) {
           const errorText = await res.text();
@@ -92,13 +89,10 @@ function Dashboard({ language, translations }) {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-clients.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-clients.php`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch clients");

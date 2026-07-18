@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config/api";
 
 function Invoices({ language, translations }) {
   const [contracts, setContracts] = useState(null);
@@ -8,9 +9,7 @@ function Invoices({ language, translations }) {
   useEffect(() => {
     const fetchContracts = async () => {
       try {
-        const res = await fetch(
-          "http://localhost/car_rental/fetch-contracts.php",
-        );
+        const res = await fetch(`${API_URL}/fetch-contracts.php`);
         if (!res.ok) {
           const errorText = await res.text();
           throw new Error(`Error: ${errorText}`);
@@ -30,7 +29,7 @@ function Invoices({ language, translations }) {
   const handleDownload = (id) => {
     // Trigger the PHP download script
     // Ensure the spelling matches your filename exactly
-    window.location.href = `http://localhost/car_rental/download.php?id=${id}`;
+    window.location.href = `${API_URL}/download.php?id=${id}`;
   };
 
   if (loading)

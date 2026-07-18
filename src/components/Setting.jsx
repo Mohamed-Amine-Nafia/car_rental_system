@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { API_URL } from "../config/api";
 
 function Setting({ onClick, language, translations }) {
   const currentTranslations = translations?.[language] || translations || {};
@@ -21,20 +22,17 @@ function Setting({ onClick, language, translations }) {
     setSuccess("");
     setError("");
     try {
-      const res = await fetch(
-        "http://localhost/car_rental/change-password.php",
-        {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            oldPass: inputData.oldPass,
-            newPass: inputData.newPass,
-          }),
+      const res = await fetch(`${API_URL}/change-password.php`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          oldPass: inputData.oldPass,
+          newPass: inputData.newPass,
+        }),
+      });
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(`Error: ${errorText}`);

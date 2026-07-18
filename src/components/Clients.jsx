@@ -1,19 +1,18 @@
 import { IdCard, Mail, Phone, Search, User } from "lucide-react";
 import { useState, useEffect } from "react";
+import { API_URL } from "../config/api";
 
 function Clients({ language, translations }) {
   const [clients, setClients] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/car_rental/fetch-clients.php",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/fetch-clients.php`, {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           const errorText = response.text();
           throw new Error(`Error: ${errorText}`);
@@ -30,6 +29,14 @@ function Clients({ language, translations }) {
     fetchClients();
   }, []);
 
+  function handleChange(e) {
+    setInputValue(e.target.value);
+  }
+
+  const filteredClients = clients.filter((client) =>
+    client.full_name.toLowerCase().includes(inputValue.toLowerCase()),
+  );
+
   return (
     <div className="relative h-screen w-full bg-primary  px-6 py-3">
       <h2 className="text-2xl text-secondary font-semibold mt-6  border-b border-ternary pb-2.5">
@@ -38,6 +45,8 @@ function Clients({ language, translations }) {
       <div className="flex items-center mt-6 gap-4  border-b border-ternary pb-6">
         <div className="flex items-center relative ">
           <input
+            value={inputValue}
+            onChange={handleChange}
             className="bg-ternary text-xs py-2 pl-3 pr-16 outline-0 rounded-full"
             type="text"
             placeholder={translations?.search || "Search"}
@@ -65,7 +74,7 @@ function Clients({ language, translations }) {
           </span>
         </div>
         <div>
-          {clients.map((client, index) => {
+          {filteredClients.map((client, index) => {
             return (
               <div
                 key={client.client_id}

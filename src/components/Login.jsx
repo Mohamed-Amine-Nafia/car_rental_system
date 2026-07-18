@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "./AuthContext";
 import { Lock, LogInIcon, MailCheck, UserKey } from "lucide-react";
 
+import { API_URL } from "../config/api";
+
 export default function Login({ language, translations }) {
   const { setUser } = useAuth();
 
@@ -16,7 +18,7 @@ export default function Login({ language, translations }) {
     setError("");
 
     try {
-      const res = await fetch("http://localhost/car_rental/login.php", {
+      const res = await fetch(`${API_URL}/login.php`, {
         method: "POST",
         credentials: "include",
         headers: {

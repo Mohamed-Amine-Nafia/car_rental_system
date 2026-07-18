@@ -1,6 +1,7 @@
 import { Check, LogIn, X } from "lucide-react";
 
 import { useState } from "react";
+import { API_URL } from "../config/api";
 
 function AddNewCar({ onClick, showform, onRefresh, language, translations }) {
   const [message, setMessage] = useState("");
@@ -28,16 +29,14 @@ function AddNewCar({ onClick, showform, onRefresh, language, translations }) {
 
     const data = new FormData();
 
-    // append text fields
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
     });
 
-    // append image
     data.append("image", image);
 
     try {
-      const response = await fetch("http://localhost/car_rental/add-car.php", {
+      const response = await fetch(`${API_URL}/add-car.php`, {
         method: "POST",
         credentials: "include",
         body: data,

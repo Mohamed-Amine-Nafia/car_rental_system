@@ -16,7 +16,9 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext"; // adjust path if needed
+import { useAuth } from "./AuthContext";
+
+import { API_URL } from "../config/api";
 
 function SideBar({ onClick, language, onLanguageChange }) {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function SideBar({ onClick, language, onLanguageChange }) {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost/car_rental/logout.php", {
+      await fetch(`${API_URL}/logout.php`, {
         method: "POST",
         credentials: "include",
       });

@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { Await } from "react-router-dom";
 import UpdateCar from "./UpdateCar";
 
+import { API_URL } from "../config/api";
+
 function Cars({ language, translations }) {
   const filters = [
     {
@@ -66,7 +68,7 @@ function Cars({ language, translations }) {
     setIsRefresh(false);
     const fetchCars = async () => {
       try {
-        const res = await fetch("http://localhost/car_rental/fetch-cars.php");
+        const res = await fetch(`${API_URL}/fetch-cars.php`);
         const data = await res.json();
 
         if (data.status !== "success") {
@@ -105,7 +107,7 @@ function Cars({ language, translations }) {
   });
 
   const handleCarDelete = async (id) => {
-    const res = await fetch("http://localhost/car_rental/delete-car.php", {
+    const res = await fetch(`${API_URL}/delete-car.php`, {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -180,7 +182,7 @@ function Cars({ language, translations }) {
               className="relative  bg-ternary-fade rounded-xl h-54 cursor-pointer  flex flex-col justify-between"
             >
               <img
-                src={`http://localhost/car_rental/uploads/cars/${car.image}`}
+                src={`${API_URL}/uploads/cars/${car.image}`}
                 alt=""
                 className="absolute w-4/6 lg:w-3/6 top-3/7 left-1/2 -translate-x-1/2 -translate-y-1/2  hover:scale-110 transition duration-300 ease-linear"
               />
