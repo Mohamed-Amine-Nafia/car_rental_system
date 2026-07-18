@@ -1,5 +1,6 @@
 import CarsIconSlider from "./CarsIconsSlider";
 import { isTablet, isDesktop } from "react-device-detect";
+import car_image from "../src/assets/images/car_2.webp"
 
 function IntroSection({ isDarkMode, language }) {
   return (
@@ -48,7 +49,7 @@ function IntroSection({ isDarkMode, language }) {
         <div className="w-full md:w-1/2 relative">
           <img
             className="w-full  mask-[url('../src/assets/images/splash_2.png')] mask-cover mask-no-repeat mask-center"
-            src="../src/assets/images/car_2.webp"
+            src={car_image}
             alt="car"
           />
         </div>
