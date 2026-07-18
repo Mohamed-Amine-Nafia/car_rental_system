@@ -1,6 +1,6 @@
 import CarsIconSlider from "./CarsIconsSlider";
 import { isTablet, isDesktop } from "react-device-detect";
-import car_image from "../src/assets/images/car_2.webp"
+import car_image from "../assets/images/car_2.webp"
 
 function IntroSection({ isDarkMode, language }) {
   return (
