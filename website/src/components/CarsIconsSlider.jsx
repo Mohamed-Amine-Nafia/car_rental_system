@@ -55,7 +55,7 @@ function CarsIconSlider() {
           >
             <img
               className="w-8  lg:w-11 h-full aspect-square"
-              src={logo}
+              src={image}
               alt="car"
             />
           </div>
