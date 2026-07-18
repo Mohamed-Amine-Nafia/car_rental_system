@@ -1,5 +1,6 @@
 import { ChevronsUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import whatsapp_logo from "../../src/assets/images/icons8-whatsapp.png";
 
 function ScrollTop() {
   const [isScroll, setScroll] = useState(false);
@@ -30,7 +31,7 @@ function ScrollTop() {
       >
         <img
           className=" w-14  animate-bounce"
-          src="../../src/assets/images/icons8-whatsapp.png"
+          src={whatsapp_logo}
           alt="whatsapp"
         />
       </a>
