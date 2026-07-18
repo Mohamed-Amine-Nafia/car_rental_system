@@ -1,16 +1,77 @@
-# React + Vite
+# Car Rental Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A secure administration dashboard built with React for managing a car rental business. The dashboard provides authenticated access to manage vehicles, reservations, customers, and invoices through a clean and responsive interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Secure authentication
+- Protected routes
+- Dashboard overview
+- Vehicle management (CRUD)
+- Reservation management
+- Customer management
+- Invoice management
+- Status updates
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- JavaScript (ES6+)
+- Tailwind CSS
+- React Router
+- Context API
+- Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Backend
+
+This dashboard communicates with a PHP REST API using session-based authentication and HTTP cookies.
+
+## Project Structure
+
+```
+src/
+├── assets/
+├── components/
+├── context/
+├── layouts/
+├── pages/
+├── services/
+├── hooks/
+└── App.jsx
+```
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd dashboard
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env.development` file:
+
+```env
+VITE_API_URL=http://localhost/car-rental-api
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Authentication
+
+- PHP Sessions
+- HttpOnly Cookies
+- Protected Routes
+- Persistent Login
+- Session Validation
+
+## Author
+
+**Mohamed Amine Nafia**
