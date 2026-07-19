@@ -25,10 +25,6 @@ function Cars({ isDarkMode, language }) {
   });
 
 
-        fetch("https://car-rental.free.je/car_rental/test.php")
-  .then(r => r.json())
-  .then(console.log)
-  .catch(console.error);
 
   const [carId, setCarId] = useState(null);
 
