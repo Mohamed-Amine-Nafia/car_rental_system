@@ -1,60 +1,41 @@
-const carsIcons = [
-  {
-    id: 0,
-    carImage: "bmw",
-  },
-  {
-    id: 1,
-    carImage: "ferrari",
-  },
-  {
-    id: 2,
-    carImage: "mercedes",
-  },
-  {
-    id: 3,
-    carImage: "porsche",
-  },
-  {
-    id: 4,
-    carImage: "renault",
-  },
-  {
-    id: 5,
-    carImage: "dacia",
-  },
-  {
-    id: 6,
-    carImage: "fiat",
-  },
-  {
-    id: 7,
-    carImage: "ford",
-  },
-  {
-    id: 8,
-    carImage: "citroen",
-  },
-  {
-    id: 9,
-    carImage: "nissan",
-  },
-];
+import bmw from "../../src/assets/images/cars_icons/bmw.png";
+import ferrari from "../../src/assets/images/cars_icons/ferrari.png";
+import mercedes from "../../src/assets/images/cars_icons/mercedes.png";
+import porsche from "../../src/assets/images/cars_icons/porsche.png";
+import renault from "../../src/assets/images/cars_icons/renault.png";
+import dacia from "../../src/assets/images/cars_icons/dacia.png";
+import ford from "../../src/assets/images/cars_icons/ford.png";
+import nissan from "../../src/assets/images/cars_icons/nissan.png";
+import kia from "../../src/assets/images/cars_icons/kia.png";
+import skoda from "../../src/assets/images/cars_icons/skoda.png";
+
 function CarsIconSlider() {
+  const cars = [
+    bmw,
+    ferrari,
+    mercedes,
+    porsche,
+    renault,
+    dacia,
+    ford,
+    nissan,
+    kia,
+    skoda,
+  ];
   return (
     <div className="flex relative h-10 w-full overflow-hidden ">
-      {carsIcons.map((car, index) => {
+      {cars.map((car, index) => {
         return (
           <div
-            key={car.id}
-            className={`absolute left-full animate-slideIn h-full w-[11.11%]`}
+            key={car}
+            className={`absolute left-full animate-slideIn h-full w-[calc(100%/${cars.length - 1})]`}
             style={{
               animationDelay: `-${index}s`,
             }}
           >
             <img
               className="w-8  lg:w-11 h-full aspect-square"
-              src={`../../src/assets/images/cars_icons/${car.carImage}.png`}
+              src={car}
               alt="car"
             />
           </div>
