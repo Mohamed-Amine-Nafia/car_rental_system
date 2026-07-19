@@ -1,16 +1,62 @@
-# React + Vite
+# Car Rental Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive car rental website built with React. It allows customers to browse available vehicles, view detailed information, and submit reservation requests through an intuitive user interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Responsive design for desktop, tablet, and mobile
+- Browse available vehicles
+- Vehicle details and pricing
+- Reservation request form
+- Contact information
+- Customer testimonials
+- Google Maps integration
+- Fast and modern user interface
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript (ES6+)
+- Tailwind CSS
+- React Router
+- Vite
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── assets/
+├── components/
+├── pages/
+├── context/
+├── hooks/
+├── services/
+└── App.jsx
+```
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd website
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env.development` file:
+
+```env
+VITE_API_URL=http://localhost/car-rental-api
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Author
+
+**Mohamed Amine Nafia**

@@ -1,5 +1,8 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "../../src/assets/images/logo.svg";
+import english_logo from "../../src/assets/images/english.png";
+import morocco_logo from "../../src/assets/images/morocco.png";
 
 function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
   const [isMenuShown, setIsMenuShown] = useState(false);
@@ -10,7 +13,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
     >
       <div className="flex-1 ">
         <img
-          src="../../src/assets/images/logo.svg"
+          src={logo}
           alt="logo"
           className={`lg:w-36 w-22 md:w-26 p-2`}
         />
@@ -27,7 +30,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
               >
                 <img
                   className="w-5"
-                  src="../../src/assets/images/english.png"
+                  src={english_logo}
                   alt="english language"
                 />
                 En
@@ -38,7 +41,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
               >
                 <img
                   className="w-5"
-                  src="../../src/assets/images/morocco.png"
+                  src={morocco_logo}
                   alt="morocco flag"
                 />
                 Ar
@@ -145,7 +148,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
           >
             <img
               className="w-4"
-              src="../../src/assets/images/english.png"
+              src={english_logo}
               alt="english language"
             />
             En
@@ -156,7 +159,7 @@ function Header({ onDarkMode, isDarkMode, onLanguageChange, language }) {
           >
             <img
               className="w-5"
-              src="../../src/assets/images/morocco.png"
+              src={morocco_logo}
               alt="morocco flag"
             />
             Ar
