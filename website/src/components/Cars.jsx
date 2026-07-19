@@ -31,7 +31,7 @@ function Cars({ isDarkMode, language }) {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
+        const response = await fetch(`https://car-rental.free.je/car_rental/fetch-available-cars.php`);
         const data = await response.json();
 
         if (data.status !== "success") {
