@@ -31,7 +31,7 @@ console.log(API_URL);
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`${API_URL}/fetch-available-cars.php?nocache=${Date.now()`);
+        const response = await fetch(`https://car-rental.free.je/car_rental/fetch-available-cars.php`);
         const data = await response.json();
 
         if (data.status !== "success") {
@@ -72,7 +72,7 @@ console.log(API_URL);
     };
 
     try {
-      const response = await fetch(`${API_URL}/rentals.php`, {
+      const response = await fetch(`https://car-rental.free.je/car_rental/rentals.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
