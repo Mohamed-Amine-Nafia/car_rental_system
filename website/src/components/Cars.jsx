@@ -24,7 +24,7 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
-
+console.log(API_URL);
 
   const [carId, setCarId] = useState(null);
 
