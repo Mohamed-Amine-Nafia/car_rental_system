@@ -24,7 +24,7 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
-
+fetch("https://car-rental.free.je/car_rental/cors.php").then((value) => console.log(value)).catch((value) => console.log(value))
 
   const [carId, setCarId] = useState(null);
 
