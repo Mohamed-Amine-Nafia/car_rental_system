@@ -24,6 +24,12 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
+
+        fetch("https://car-rental.free.je/car_rental/test.php")
+  .then(r => r.json())
+  .then(console.log)
+  .catch(console.error);
+
   const [carId, setCarId] = useState(null);
 
   useEffect(() => {
@@ -40,10 +46,7 @@ function Cars({ isDarkMode, language }) {
           setCars(data.data);
           localStorage.setItem("cars", JSON.stringify(data.data));
         }
-        fetch("https://car-rental.free.je/car_rental/test.php")
-  .then(r => r.json())
-  .then(console.log)
-  .catch(console.error);
+  
       } catch (error) {
         const cached = JSON.parse(localStorage.getItem("cars"));
         if (cached) {
