@@ -124,7 +124,7 @@ console.log(API_URL);
 
     const fetchContract = async () => {
       try {
-        const response = await fetch(`${API_URL}/create-contract.php`, {
+        const response = await fetch(`https://car-rental.free.je/car_rental/create-contract.php`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -192,7 +192,7 @@ console.log(API_URL);
 
   const handleCarStatus = async (id, newStatus) => {
     try {
-      const res = await fetch(`${API_URL}/reserved-car.php`, {
+      const res = await fetch(`https://car-rental.free.je/car_rental/reserved-car.php`, {
         method: "PATCH",
         credentials: "include",
         headers: {
