@@ -24,14 +24,14 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
-fetch("https://car-rental.free.je/car_rental/cors.php").then((value) => console.log(value)).catch((value) => console.log(value))
+
 
   const [carId, setCarId] = useState(null);
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`https://car-rental.free.je/car_rental/fetch-available-cars.php`);
+        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
         const data = await response.json();
 
         if (data.status !== "success") {
