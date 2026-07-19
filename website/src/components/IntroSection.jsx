@@ -51,7 +51,7 @@ function IntroSection({ isDarkMode, language }) {
             className="w-full  mask-[url('../src/assets/images/splash_2.png')] mask-cover mask-no-repeat mask-center"
             src={car_image}
             alt="car"
-            loading="lazy"
+        
           />
         </div>
       </div>
