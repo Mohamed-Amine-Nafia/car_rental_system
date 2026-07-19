@@ -24,12 +24,20 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
+console.log(API_URL);
+
   const [carId, setCarId] = useState(null);
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
+        const response = await fetch(`${API_URL}/fetch-available-cars.php`,{
+          method: "GET",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  credentials: "include"
+        });
         const data = await response.json();
 
         if (data.status !== "success") {
@@ -40,6 +48,7 @@ function Cars({ isDarkMode, language }) {
           setCars(data.data);
           localStorage.setItem("cars", JSON.stringify(data.data));
         }
+  
       } catch (error) {
         const cached = JSON.parse(localStorage.getItem("cars"));
         if (cached) {
@@ -50,6 +59,7 @@ function Cars({ isDarkMode, language }) {
       }
     };
     fetchCars();
+    
   }, []);
 
   const handleSubmit = async (e) => {
