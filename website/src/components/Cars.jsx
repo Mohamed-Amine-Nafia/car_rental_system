@@ -31,7 +31,7 @@ function Cars({ isDarkMode, language }) {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
+        const response = await fetch(`${API_URL}/fetch-available-cars.php?nocache=${Date.now()`);
         const data = await response.json();
 
         if (data.status !== "success") {
