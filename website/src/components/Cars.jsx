@@ -31,7 +31,13 @@ console.log(API_URL);
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch(`${API_URL}/fetch-available-cars.php`);
+        const response = await fetch(`${API_URL}/fetch-available-cars.php`,{
+          method: "GET",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  credentials: "include"
+        });
         const data = await response.json();
 
         if (data.status !== "success") {
