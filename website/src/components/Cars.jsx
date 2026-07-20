@@ -16,6 +16,19 @@ import kia from "../../src/assets/images/cars_icons/kia.png";
 import skoda from "../../src/assets/images/cars_icons/skoda.png";
 
 
+  const carsIcons = [
+    bmw,
+    ferrari,
+    mercedes,
+    porsche,
+    renault,
+    dacia,
+    ford,
+    nissan,
+    kia,
+    skoda,
+  ];
+
 
 function Cars({ isDarkMode, language }) {
   const [cars, setCars] = useState([]);
@@ -263,7 +276,7 @@ console.log(API_URL);
               <div className="p-3 flex items-center gap-4">
                 <img
                   className="w-8 h-8 md:w-10 md:h-10 "
-                  src={`../src/assets/images/cars_icons/${car.brand}.png`}
+                  src={carsIcons[car.brand}
                   alt="car"
                 />
                 <div>
