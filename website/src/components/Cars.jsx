@@ -16,7 +16,7 @@ import kia from "../../src/assets/images/cars_icons/kia.png";
 import skoda from "../../src/assets/images/cars_icons/skoda.png";
 
 
-  const carsIcons = [
+  const carsIcons = {
     bmw,
     ferrari,
     mercedes,
@@ -27,7 +27,7 @@ import skoda from "../../src/assets/images/cars_icons/skoda.png";
     nissan,
     kia,
     skoda,
-  ];
+  };
 
 
 function Cars({ isDarkMode, language }) {
