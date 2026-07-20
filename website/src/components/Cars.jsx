@@ -3,6 +3,20 @@ import { useEffect, useState } from "react";
 
 import { API_URL } from "../config/api";
 
+
+import bmw from "../../src/assets/images/cars_icons/bmw.png";
+import ferrari from "../../src/assets/images/cars_icons/ferrari.png";
+import mercedes from "../../src/assets/images/cars_icons/mercedes.png";
+import porsche from "../../src/assets/images/cars_icons/porsche.png";
+import renault from "../../src/assets/images/cars_icons/renault.png";
+import dacia from "../../src/assets/images/cars_icons/dacia.png";
+import ford from "../../src/assets/images/cars_icons/ford.png";
+import nissan from "../../src/assets/images/cars_icons/nissan.png";
+import kia from "../../src/assets/images/cars_icons/kia.png";
+import skoda from "../../src/assets/images/cars_icons/skoda.png";
+
+
+
 function Cars({ isDarkMode, language }) {
   const [cars, setCars] = useState([]);
   const [reservedCar, setReservedCar] = useState(null);
