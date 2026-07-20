@@ -11,6 +11,10 @@ import {
   Users,
 } from "lucide-react";
 
+import logo from "../../src/assets/images/logo.svg";
+import englishLogo from "../../src/assets/images/english.png";
+import arabicLogo from "../../src/assets/images/morocco.png";
+
 import Setting from "./Setting.jsx";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -42,7 +46,7 @@ function SideBar({ onClick, language, onLanguageChange }) {
     <div className="flex justify-between items-center px-6 py-3 w-full ">
       <div className="flex items-center">
         <img
-          src="../../src/assets/images/logo.svg"
+          src={logo}
           alt="logo"
           className="w-32"
         />
@@ -117,7 +121,7 @@ function SideBar({ onClick, language, onLanguageChange }) {
           >
             <img
               className="w-4"
-              src="../../src/assets/images/english.png"
+              src={englishLogo}
               alt="English"
             />
             EN
@@ -129,7 +133,7 @@ function SideBar({ onClick, language, onLanguageChange }) {
           >
             <img
               className="w-5"
-              src="../../src/assets/images/morocco.png"
+              src={arabicLogo}
               alt="Arabic"
             />
             AR
