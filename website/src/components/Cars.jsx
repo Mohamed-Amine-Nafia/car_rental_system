@@ -36,7 +36,7 @@ function Cars({ isDarkMode, language }) {
   const [isFormShown, setIsFormShown] = useState(false);
 
   const [rentalId, setRentalId] = useState(null);
-  // CHANGED: We now track the PDF file path instead of raw HTML string
+
   const [contractFilePath, setContractFilePath] = useState("");
   const [showContract, setShowContract] = useState(false);
 
@@ -51,7 +51,7 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
-console.log(API_URL);
+
 
   const [carId, setCarId] = useState(null);
 
