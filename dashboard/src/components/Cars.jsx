@@ -10,16 +10,16 @@ import {
 } from "lucide-react";
 
 
-import bmw from "../../src/assets/images/cars_icons/bmw.png";
-import ferrari from "../../src/assets/images/cars_icons/ferrari.png";
-import mercedes from "../../src/assets/images/cars_icons/mercedes.png";
-import porsche from "../../src/assets/images/cars_icons/porsche.png";
-import renault from "../../src/assets/images/cars_icons/renault.png";
-import dacia from "../../src/assets/images/cars_icons/dacia.png";
-import ford from "../../src/assets/images/cars_icons/ford.png";
-import nissan from "../../src/assets/images/cars_icons/nissan.png";
-import kia from "../../src/assets/images/cars_icons/kia.png";
-import skoda from "../../src/assets/images/cars_icons/skoda.png";
+import bmw from "../../src/assets/images/car-logo/bmw.png";
+import ferrari from "../../src/assets/images/car-logo/ferrari.png";
+import mercedes from "../../src/assets/images/car-logo/mercedes.png";
+import porsche from "../../src/assets/images/car-logo/porsche.png";
+import renault from "../../src/assets/images/car-logo/renault.png";
+import dacia from "../../src/assets/images/car-logo/dacia.png";
+import ford from "../../src/assets/images/car-logo/ford.png";
+import nissan from "../../src/assets/images/car-logo/nissan.png";
+import kia from "../../src/assets/images/car-logo/kia.png";
+import skoda from "../../src/assets/images/car-logo/skoda.png";
 
 
  const carsIcons = {
