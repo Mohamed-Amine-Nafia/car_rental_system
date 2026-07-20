@@ -3,13 +3,40 @@ import { useEffect, useState } from "react";
 
 import { API_URL } from "../config/api";
 
+
+import bmw from "../../src/assets/images/cars_icons/bmw.png";
+import ferrari from "../../src/assets/images/cars_icons/ferrari.png";
+import mercedes from "../../src/assets/images/cars_icons/mercedes.png";
+import porsche from "../../src/assets/images/cars_icons/porsche.png";
+import renault from "../../src/assets/images/cars_icons/renault.png";
+import dacia from "../../src/assets/images/cars_icons/dacia.png";
+import ford from "../../src/assets/images/cars_icons/ford.png";
+import nissan from "../../src/assets/images/cars_icons/nissan.png";
+import kia from "../../src/assets/images/cars_icons/kia.png";
+import skoda from "../../src/assets/images/cars_icons/skoda.png";
+
+
+  const carsIcons = {
+    bmw,
+    ferrari,
+    mercedes,
+    porsche,
+    renault,
+    dacia,
+    ford,
+    nissan,
+    kia,
+    skoda,
+  };
+
+
 function Cars({ isDarkMode, language }) {
   const [cars, setCars] = useState([]);
   const [reservedCar, setReservedCar] = useState(null);
   const [isFormShown, setIsFormShown] = useState(false);
 
   const [rentalId, setRentalId] = useState(null);
-  // CHANGED: We now track the PDF file path instead of raw HTML string
+
   const [contractFilePath, setContractFilePath] = useState("");
   const [showContract, setShowContract] = useState(false);
 
@@ -24,7 +51,7 @@ function Cars({ isDarkMode, language }) {
     license: "",
   });
 
-console.log(API_URL);
+
 
   const [carId, setCarId] = useState(null);
 
@@ -249,7 +276,7 @@ console.log(API_URL);
               <div className="p-3 flex items-center gap-4">
                 <img
                   className="w-8 h-8 md:w-10 md:h-10 "
-                  src={`../src/assets/images/cars_icons/${car.brand}.png`}
+                  src={carsIcons[car.brand]}
                   alt="car"
                 />
                 <div>
