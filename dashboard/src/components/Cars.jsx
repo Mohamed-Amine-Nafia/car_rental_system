@@ -8,6 +8,33 @@ import {
   Trash2,
   Undo2,
 } from "lucide-react";
+
+
+import bmw from "../../src/assets/images/cars_icons/bmw.png";
+import ferrari from "../../src/assets/images/cars_icons/ferrari.png";
+import mercedes from "../../src/assets/images/cars_icons/mercedes.png";
+import porsche from "../../src/assets/images/cars_icons/porsche.png";
+import renault from "../../src/assets/images/cars_icons/renault.png";
+import dacia from "../../src/assets/images/cars_icons/dacia.png";
+import ford from "../../src/assets/images/cars_icons/ford.png";
+import nissan from "../../src/assets/images/cars_icons/nissan.png";
+import kia from "../../src/assets/images/cars_icons/kia.png";
+import skoda from "../../src/assets/images/cars_icons/skoda.png";
+
+
+ const carsIcons = {
+    bmw,
+    ferrari,
+    mercedes,
+    porsche,
+    renault,
+    dacia,
+    ford,
+    nissan,
+    kia,
+    skoda,
+  };
+
 import AddNewCar from "./AddNewCar";
 import { useEffect, useState } from "react";
 import { Await } from "react-router-dom";
@@ -189,7 +216,7 @@ function Cars({ language, translations }) {
               <div className="flex items-center justify-between gap-2 p-2 ">
                 <div className="flex items-center gap-1.5">
                   <img
-                    src={`../../src/assets/images/car-logo/${car.brand}.png`}
+                        src={carsIcons[car.brand.toLowerCase()]}
                     alt="car"
                     className="w-7"
                   />
