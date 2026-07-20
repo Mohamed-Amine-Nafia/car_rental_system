@@ -276,7 +276,7 @@ console.log(API_URL);
               <div className="p-3 flex items-center gap-4">
                 <img
                   className="w-8 h-8 md:w-10 md:h-10 "
-                  src={carsIcons.includes(car.brand) && carsIcons[car.brand]}
+                  src={carsIcons[0]}
                   alt="car"
                 />
                 <div>
